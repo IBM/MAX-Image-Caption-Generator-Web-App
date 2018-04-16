@@ -1,0 +1,14 @@
+/* style sheet for MAX webapp */
+
+img {
+    float: left;
+    width: 50%;
+    padding: 5%;
+    max-width: 750px;
+    min-width: 250px;
+}
+
+div #thumbnails {
+    max-height: 90vh;
+    overflow: auto;
+}
