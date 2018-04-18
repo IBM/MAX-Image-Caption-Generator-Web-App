@@ -3,14 +3,14 @@
 
 <head>
 
-    <title>MAX Web App</title>
+    <title>MAX Image Caption Generator Demo</title>
 
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="static/webapp.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
     <script src="static/webapp.js"></script>
 
 </head>
@@ -20,21 +20,24 @@
     <div class="container">
 
         <div class="header">
-            <h3 class="text-muted">MAX Web App</h3>
+            <h2 class="text-muted">MAX Image Caption Generator Demo</h2>
+        </div>
+
+        <div id="word-cloud">
         </div>
 
         <div class="row">
-            <div class="col-lg-3">
-                <h4>Upload New Image</h4>
+            <div id="file-upload">
+                <h4>Upload A New Image</h4>
 
-                <form id="img_upload" enctype="multipart/form-data">
-                    <input type="file" name="file" />
+                <form id="img-upload" enctype="multipart/form-data">
+                    <input type="file" name="file"/>
                     <br/><br/>
-                    <input type="submit" value="upload" />
+                    <input type="submit" value="upload"/>
                 </form>
             </div>
 
-            <div class="col-lg-9" id="thumbnails">
+            <div id="thumbnails">
                 {% for key, value in image_captions.items() %}
                     <img src="{{ escape(key) }}" alt="{{ escape(value) }}" title="{{ escape(value) }}">
                 {% end %}

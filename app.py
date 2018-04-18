@@ -1,8 +1,15 @@
-from os import listdir
-import requests
-import time
-import tornado.ioloop as ioloop
-import tornado.web as web
+import logging, os, requests, signal, time
+from tornado import httpserver, ioloop, web
+
+
+# Setup Logging
+logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(levelname)s: %(message)s')
+
+# Global variables
+ml_endpoint = "http://localhost:5000/model/predict"
+static_img_path = "static/img/"
+temp_img_prefix = "MAX-"
+image_captions = {}
 
 
 class MainHandler(web.RequestHandler):
@@ -13,8 +20,8 @@ class MainHandler(web.RequestHandler):
 class UploadHandler(web.RequestHandler):
     def post(self):
         file_des = self.request.files['file'][0]
-        file_name = "MAX-" + file_des['filename']
-        rel_path = "static/img/" + file_name
+        file_name = temp_img_prefix + file_des['filename']
+        rel_path = static_img_path + file_name
         output_file = open(rel_path, 'wb')
         output_file.write(file_des['body'])
         output_file.close()
@@ -22,34 +29,48 @@ class UploadHandler(web.RequestHandler):
         self.finish({"file_name": rel_path, "caption": caption})
 
 
-image_captions = {}
-
-
+# Runs ML on given image
 def run_ml(img_path):
-    ml_endpoint = "http://localhost:5000/model/predict"
-
-    img_files = {'image': open(img_path, 'rb')}
-
-    r = requests.post(url=ml_endpoint, files=img_files)
-
+    img_file = {'image': open(img_path, 'rb')}
+    r = requests.post(url=ml_endpoint, files=img_file)
     cap_json = r.json()
-
     caption = cap_json['predictions'][0]['caption']
-
     image_captions[img_path] = caption
-
     return caption
 
 
-def prepare_metadata():
-    # Create list of images with relative paths
-    rel_path = "static/img/"
-    image_list = listdir(rel_path)
-    rel_img_list = [rel_path + s for s in image_list]
+# Gets list of images with relative paths from static dir
+def get_image_list():
+    image_list = os.listdir(static_img_path)
+    rel_img_list = [static_img_path + s for s in image_list]
+    return rel_img_list
 
-    # Run images through ML
+
+# Run all static images through ML
+def prepare_metadata():
+    rel_img_list = get_image_list()
     for img in rel_img_list:
         run_ml(img)
+
+
+# Deletes all files uploaded through the GUI
+def clean_up():
+    img_list = get_image_list()
+    for img_file in img_list:
+        if img_file.startswith(static_img_path + temp_img_prefix):
+            os.remove(img_file)
+
+
+def signal_handler(sig, frame):
+    ioloop.IOLoop.current().add_callback_from_signal(shutdown)
+
+
+def shutdown():
+    logging.info("Cleaning up image files")
+    clean_up()
+    logging.info("Stopping server")
+    server.stop()
+    ioloop.IOLoop.current().stop()
 
 
 def make_app():
@@ -60,26 +81,34 @@ def make_app():
 
     configs = {
         'static_path': 'static',
-        'template_path': 'templates',
-        'debug': True
+        'template_path': 'templates'
     }
 
-    web_app = web.Application(handlers, **configs)
-
-    return web_app
+    return web.Application(handlers, **configs)
 
 
 def main():
-    print("MAX WebApp: Setting up App")
+    try:
+        resp = requests.get(ml_endpoint)
+    except requests.exceptions.ConnectionError:
+        logging.error("Cannot connect to the Object Detection API")
+        logging.error("Please run the Object Detection API docker image first")
+        raise SystemExit
+
+    logging.info("Starting Server")
+    global server
     app = make_app()
-    if not image_captions:
-        print("MAX WebApp: Preparing ML Metadata")
-        start = time.time()
-        prepare_metadata()
-        end = time.time()
-        print("MAX WebApp: Metadata prepared in " + str(end - start) + " seconds")
-    app.listen(8088)
-    print("MAX WebApp: Ctrl+C to kill")
+    server = httpserver.HTTPServer(app)
+    server.listen(8088)
+    signal.signal(signal.SIGINT, signal_handler)
+
+    logging.info("Preparing ML Metadata")
+    start = time.time()
+    prepare_metadata()
+    end = time.time()
+    logging.info("Metadata prepared in %s seconds", end - start)
+
+    logging.info("Use Ctrl+C to stop server")
     ioloop.IOLoop.current().start()
 
 
