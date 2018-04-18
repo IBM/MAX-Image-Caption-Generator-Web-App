@@ -1,13 +1,19 @@
 /* style sheet for MAX webapp */
 
+#file-upload {
+    padding: 1%;
+}
+
 img {
     width: 50%;
     padding: 5%;
     max-width: 500px;
     min-width: 250px;
+    float: left;
 }
 
 div #thumbnails {
     max-height: 75vh;
+    width: 100%;
     overflow: auto;
 }
