@@ -1,18 +1,26 @@
 /* style sheet for MAX webapp */
 
+.container-fluid {
+    padding: 0 5% 1% 5%;
+}
+
+.panel-title {
+    font-size: 18px;
+}
+
+#word-cloud {
+    text-align: center;
+}
+
 #file-upload {
     padding: 1%;
 }
 
-img {
-    width: 50%;
-    padding: 5%;
-    max-width: 500px;
-    min-width: 250px;
-    float: left;
+#thumbnails img {
+    width: 24%;
 }
 
-div #thumbnails {
+#thumbnails {
     max-height: 75vh;
     width: 100%;
     overflow: auto;

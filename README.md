@@ -19,3 +19,10 @@ Before running this web app you must install it's dependencies:
 You then start the web app by running:
 
     python app.py
+
+### JavaScript Libraries
+
+This web app depends on a couple of non-standard js libraries
+
+- [Image Picker](http://rvera.github.io/image-picker/)
+- [d3 word cloud](https://github.com/jasondavies/d3-cloud)

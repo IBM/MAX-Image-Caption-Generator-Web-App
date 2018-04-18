@@ -5,44 +5,61 @@
 
     <title>MAX Image Caption Generator Web App</title>
 
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="static/image-picker.css" rel="stylesheet">
     <link href="static/webapp.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src="static/image-picker.min.js"></script>
     <script src="static/webapp.js"></script>
 
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="container-fluid">
 
-        <div class="header">
-            <h2 class="text-muted">MAX Image Caption Generator Web App</h2>
-        </div>
-
-        <div id="word-cloud">
+        <div class="page-header">
+            <h1 align="center">MAX Image Caption Generator Web App</h1>
         </div>
 
         <div class="row">
-            <div id="file-upload">
-                <h4>Upload A New Image</h4>
-
-                <form id="img-upload" enctype="multipart/form-data">
-                    <input type="file" name="file"/>
-                    <br/><br/>
-                    <input type="submit" value="upload"/>
-                </form>
+            <div id="file-upload" class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">Upload A New Image</div>
+                    </div>
+                    <div class="panel-body">
+                        <form id="img-upload" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input id="file-input" type="file" name="file"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-            <div id="thumbnails">
+            <div id="word-cloud" class="col-md-9"></div>
+        </div>
+
+        <div class="row">
+            <div id="thumbnails" class="well">
                 {% for key, value in image_captions.items() %}
-                    <img src="{{ escape(key) }}" alt="{{ escape(value) }}" title="{{ escape(value) }}">
+                    <img class="img-thumbnail" src="{{ escape(key) }}" alt="{{ escape(value) }}" title="{{ escape(value) }}">
                 {% end %}
             </div>
         </div>
+
+        <footer class="footer">
+            <hr/>
+            <p>Web App created by IBM CODAIT</p>
+        </footer>
 
     </div>
 

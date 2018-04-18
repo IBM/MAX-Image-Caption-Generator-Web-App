@@ -1,7 +1,7 @@
 // javascript code for MAX webapp
 
 function add_thumbnails(data) {
-    var img_object = "<img src='" + data["file_name"] + "' alt='" + data["caption"] + "' title='" + data["caption"] + "' >";
+    var img_object = "<img class='img-thumbnail' src='" + data["file_name"] + "' alt='" + data["caption"] + "' title='" + data["caption"] + "' >";
     $("#thumbnails").prepend(img_object);
 }
 
