@@ -20,6 +20,27 @@ You then start the web app by running:
 
     python app.py
 
+### Instructions for Docker
+
+To run the web app with Docker you need to allow the containers running the web
+server and the REST endpoint to share the same network stack. This is done in
+the following steps.
+
+Modify the command that runs the Image Caption Generator REST endpoint
+to map the 8088 port:
+
+    docker run -it -p 5000:5000 -p 8088:8088 --name max-im2txt max-im2txt
+
+
+Build the web app image by running:
+
+    docker build -t web app
+
+Run the web app container using:
+
+    docker run --net='container:max-im2txt' -it webapp
+
+
 ### JavaScript Libraries
 
 This web app depends on a couple of non-standard js libraries
