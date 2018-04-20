@@ -34,7 +34,7 @@ to map the 8088 port:
 
 Build the web app image by running:
 
-    docker build -t web app
+    docker build -t webapp .
 
 Run the web app container using:
 
