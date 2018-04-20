@@ -1,11 +1,13 @@
 // javascript code for MAX web app
 
 function add_thumbnails(data) {
-    $('#thumbnails select').prepend($("<option></option>")
-        .attr("data-img-src", data["file_name"])
-        .attr("data-img-label", data["caption"])
-        .attr("data-img-alt", data["caption"])
-        .text(data["caption"]));
+    if (get_keys().includes(data["file_name"]) == false) {
+        $('#thumbnails select').prepend($("<option></option>")
+            .attr("data-img-src", data["file_name"])
+            .attr("data-img-label", data["caption"])
+            .attr("data-img-alt", data["caption"])
+            .text(data["caption"]));
+    }
 }
 
 function get_keys() {
