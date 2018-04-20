@@ -105,3 +105,6 @@ ENV/
 
 # Uploads
 /static/img/MAX-*
+
+# Node modules
+/node_modules

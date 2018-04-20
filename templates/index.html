@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>MAX Image Caption Generator Web App</title>
+    <title>MAX Image Caption Generator</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
 
@@ -22,43 +22,76 @@
 
 <body>
 
-    <div class="container-fluid">
-
-        <div class="page-header">
-            <h1 align="center">MAX Image Caption Generator Web App</h1>
-        </div>
+    <div class="container-fluid ibm-code">
 
         <div class="row">
-            <div id="file-upload" class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">Upload A New Image</div>
+
+            <div class="col-md-6">
+
+
+                    <div id="codait-logo" class="col-md-3">
+                        <img src="static/codait-logo.jpg"/>
                     </div>
-                    <div class="panel-body">
-                        <form id="img-upload" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <input id="file-input" type="file" name="file"/>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+
+                    <div class="col-md-4 title-section">
+                        <h1>MAX Image Caption Generator</h1>
                     </div>
+
+
+                <div class="col-md-5">
+
+                    <div id="file-upload" class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">Upload A New Image</div>
+                        </div>
+                        <div class="panel-body">
+                            <form id="img-upload" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input id="file-input" type="file" name="file"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
 
-            <div id="word-cloud" class="col-md-9"></div>
         </div>
 
         <div class="row">
-            <div id="thumbnails" class="well">
-                {% for key, value in image_captions.items() %}
-                    <img class="img-thumbnail" src="{{ escape(key) }}" alt="{{ escape(value) }}" title="{{ escape(value) }}">
-                {% end %}
+
+            <div class="col-md-7">
+
+                <div id="thumbnails" class="well">
+                    <select multiple="multiple" class="image-picker">
+                    {% for key, value in image_captions.items() %}
+                        <option data-img-src="{{ escape(key) }}"
+                                data-img-label="{{ escape(value) }}"
+                                data-img-alt="{{ escape(value) }}"
+                                value="{{ escape(key) }}">
+                            {{ escape(value) }}
+                        </option>
+                    {% end %}
+                    </select>
+                </div>
+
             </div>
+
+            <div class="col-md-5">
+
+                <div class="">
+                    <div id="word-cloud" class="col-md-6"></div>
+                </div>
+
+            </div>
+
         </div>
 
         <footer class="footer">
             <hr/>
-            <p>Web App created by IBM CODAIT</p>
+            <p>Created at the IBM Center for Open-Source & AI Technologies</p>
         </footer>
 
     </div>

@@ -1,7 +1,25 @@
-/* style sheet for MAX webapp */
+/* style sheet for MAX web app */
+
+body .ibm-code {
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
 
 .container-fluid {
-    padding: 0 5% 1% 5%;
+    padding: 1% 2%;
+}
+
+#codait-logo {
+    min-width: 162px;
+    min-height: 150px;
+}
+
+#codait-logo img {
+    width: 162px;
+    height: 150px;
+}
+
+.title-section h1 {
+    margin-top: 10px;
 }
 
 .panel-title {
@@ -12,16 +30,26 @@
     text-align: center;
 }
 
-#file-upload {
-    padding: 1%;
-}
-
-#thumbnails img {
-    width: 24%;
+.thumbnails li {
+    width: 30%;
 }
 
 #thumbnails {
     max-height: 75vh;
     width: 100%;
     overflow: auto;
+}
+
+.ibm-code .btn-primary {
+    background-color: #26A8A2;
+    border-color: #32A8A3;
+}
+
+.ibm-code .btn-primary:hover {
+    background-color: #1E8B87;
+    border-color: #24D8B89;
+}
+
+.ibm-code  ul.thumbnails.image_picker_selector li .thumbnail.selected {
+    background: #5FBFBB;
 }

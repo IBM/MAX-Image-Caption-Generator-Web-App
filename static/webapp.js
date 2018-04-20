@@ -1,14 +1,23 @@
-// javascript code for MAX webapp
+// javascript code for MAX web app
 
 function add_thumbnails(data) {
-    var img_object = "<img class='img-thumbnail' src='" + data["file_name"] + "' alt='" + data["caption"] + "' title='" + data["caption"] + "' >";
-    $("#thumbnails").prepend(img_object);
+    $('#thumbnails select').prepend($("<option></option>")
+        .attr("data-img-src", data["file_name"])
+        .attr("data-img-label", data["caption"])
+        .attr("data-img-alt", data["caption"])
+        .text(data["caption"]));
+}
+
+function get_keys() {
+    return $('#thumbnails select').children('option').map(function () {
+        return $(this).attr('data-img-src');
+    }).get();
 }
 
 function get_words() {
     var all_words = [];
-    $('#thumbnails').children('img').each(function () {
-        capt_text = $(this).attr('title');
+    $('#thumbnails .image_picker_selector .selected').children().filter("img").each(function () {
+        capt_text = $(this).attr('alt');
         word_arr = capt_text.split(' ');
         $.merge(all_words, word_arr);
     });
@@ -23,7 +32,7 @@ function get_word_entries() {
 
     var word_count = {};
 
-    if (words.length == 1){
+    if (words.length == 1) {
         word_count[words[0]] = 1;
     } else {
         words.forEach(function (word) {
@@ -44,9 +53,11 @@ function get_word_entries() {
 function word_cloud() {
     $('#word-cloud').empty();
 
-    var fill = d3.scaleOrdinal(d3.schemeCategory10);
+    // var fill = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var width = 800;
+    var fill = d3.scaleOrdinal().range(["#262626","#66D1CD","#01807D","#C6C4C4","#7C9EB2"]);
+
+    var width = 500;
     var height = 500;
 
     var word_entries = get_word_entries();
@@ -63,7 +74,7 @@ function word_cloud() {
         .words(word_entries)
         .text(function(d) { return d.key; })
         .rotate(function() { return ~~(Math.random() * 2) * 0; })
-        .font("Impact")
+        .font("IBM Plex Sans")
         .fontSize(function(d) { return xScale(+d.value); })
         .on("end", draw);
 
@@ -79,7 +90,7 @@ function word_cloud() {
                 .data(words)
             .enter().append("text")
                 .style("font-size", function(d) { return xScale(+d.value) + "px"; })
-                .style("font-family", "Impact")
+                .style("font-family", "IBM Plex Sans")
                 .style("fill", function(d, i) { return fill(i); })
                 .attr("text-anchor", "middle")
                 .attr("transform", function(d) {
@@ -89,7 +100,19 @@ function word_cloud() {
     }
 }
 
+function set_img_picker() {
+    $("#thumbnails select").imagepicker({
+        show_label  : true,
+        clicked: function() {
+            word_cloud();
+        }
+    });
+}
+
 $(function() {
+    set_img_picker();
+    $("#thumbnails select").val(get_keys());
+    $("#thumbnails select").data('picker').sync_picker_with_select();
     word_cloud();
 
     // Image upload form submit functionality
@@ -112,7 +135,7 @@ $(function() {
             dataType: "json",
             success: function(data) {
                 add_thumbnails(data);
-                word_cloud();
+                set_img_picker();
             }
         })
     })
