@@ -1,4 +1,4 @@
-import logging, os, requests, signal, time
+import collections, logging, os, requests, signal, time
 from tornado import httpserver, ioloop, web
 
 
@@ -9,12 +9,20 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(levelnam
 ml_endpoint = "http://localhost:5000/model/predict"
 static_img_path = "static/img/"
 temp_img_prefix = "MAX-"
-image_captions = {}
+image_captions = collections.OrderedDict()
 
 
 class MainHandler(web.RequestHandler):
     def get(self):
         self.render("index.html", image_captions=image_captions)
+
+
+class CleanupHandler(web.RequestHandler):
+    def get(self):
+        self.render("cleanup.html")
+
+    def delete(self):
+        clean_up()
 
 
 class UploadHandler(web.RequestHandler):
@@ -41,7 +49,7 @@ def run_ml(img_path):
 
 # Gets list of images with relative paths from static dir
 def get_image_list():
-    image_list = os.listdir(static_img_path)
+    image_list = sorted(os.listdir(static_img_path))
     rel_img_list = [static_img_path + s for s in image_list]
     return rel_img_list
 
@@ -53,12 +61,13 @@ def prepare_metadata():
         run_ml(img)
 
 
-# Deletes all files uploaded through the GUI
+# Deletes all files uploaded through the GUI and removes them from the dict
 def clean_up():
     img_list = get_image_list()
     for img_file in img_list:
         if img_file.startswith(static_img_path + temp_img_prefix):
             os.remove(img_file)
+            image_captions.pop(img_file)
 
 
 def signal_handler(sig, frame):
@@ -76,7 +85,8 @@ def shutdown():
 def make_app():
     handlers = [
         (r"/", MainHandler),
-        (r"/upload", UploadHandler)
+        (r"/upload", UploadHandler),
+        (r"/cleanup", CleanupHandler)
     ]
 
     configs = {

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>MAX Image Caption Generator - Image Cleanup</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="static/webapp.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container-fluid ibm-code">
+
+        <div class="row">
+
+            <div class="col-md-7">
+
+                <div id="codait-logo" class="col-md-3">
+                    <a href="/">
+                        <img src="static/codait-logo.jpg"/>
+                    </a>
+                </div>
+
+                <div class="col-md-4 title-section">
+                    <h1>MAX Image Caption Generator</h1>
+                </div>
+
+
+                <div class="col-md-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">Image File Cleanup</div>
+                        </div>
+                        <div class="panel-body">
+                            <button onclick="clean_up_imgs()" class="btn btn-primary">Delete User Uploaded Images</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <hr/>
+            <p>Created at the IBM Center for Open-Source Data & AI Technologies</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+function clean_up_imgs() {
+    if (confirm("Are you sure you wish to delete all user uploaded images?")) {
+        $.ajax({
+            url: "/cleanup",
+            method: "delete",
+            success: function(data) {
+                alert("User uploaded images successfully deleted");
+            }
+        });
+    }
+}
+</script>

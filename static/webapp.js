@@ -64,6 +64,11 @@ function word_cloud() {
 
     var word_entries = get_word_entries();
 
+    if (word_entries.length == 0) {
+        $('#word-cloud').append("<div class='h2 empty-word-cloud'>Select images to generate the word cloud</div>");
+        return;
+    }
+
     var xScale = d3.scaleLinear()
         .domain([0, d3.max(word_entries, function(d) {
             return d.value;
@@ -82,6 +87,22 @@ function word_cloud() {
 
     layout.start();
 
+    function on_word_mouseover(d) {
+        d3.select(this).style("font-size", function(d) {
+            return xScale(+d.value) + 5 + "px";
+        });
+    }
+
+    function on_word_mouseout(d) {
+        d3.select(this).style("font-size", function(d) {
+            return xScale(+d.value) + "px";
+        });
+    }
+
+    function on_word_click(d) {
+        select_on(d.text);
+    }
+
     function draw(words) {
         d3.select('#word-cloud').append("svg")
                 .attr("width", width)
@@ -93,13 +114,28 @@ function word_cloud() {
             .enter().append("text")
                 .style("font-size", function(d) { return xScale(+d.value) + "px"; })
                 .style("font-family", "IBM Plex Sans")
+                .style("cursor", "pointer")
                 .style("fill", function(d, i) { return fill(i); })
                 .attr("text-anchor", "middle")
                 .attr("transform", function(d) {
                     return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
                 })
-                .text(function(d) { return d.key; });
+                .text(function(d) { return d.key; })
+                .on("mouseover", on_word_mouseover)
+                .on("mouseout", on_word_mouseout)
+                .on("click", on_word_click);
     }
+}
+
+function select_on(word) {
+    var key_list = [];
+    $('#thumbnails .image_picker_selector .selected').children().filter("img").each(function () {
+        capt_text = $(this).attr('alt');
+        if (capt_text.indexOf(word) >= 0) {
+            key_list.push($(this).attr('src'))
+        }
+    });
+    set_selected_images(key_list);
 }
 
 function set_img_picker() {
@@ -111,11 +147,23 @@ function set_img_picker() {
     });
 }
 
-$(function() {
-    set_img_picker();
-    $("#thumbnails select").val(get_keys());
+function set_selected_images(imgs) {
+    $("#thumbnails select").val(imgs);
     $("#thumbnails select").data('picker').sync_picker_with_select();
     word_cloud();
+}
+
+function select_all(bool) {
+    if (bool) {
+        set_selected_images(get_keys());
+    } else {
+        set_selected_images([]);
+    }
+}
+
+$(function() {
+    set_img_picker();
+    select_all(true);
 
     // Image upload form submit functionality
     $('#img-upload').on('submit', function(data){

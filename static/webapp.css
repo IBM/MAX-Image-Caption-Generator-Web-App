@@ -26,6 +26,10 @@ body .ibm-code {
     font-size: 18px;
 }
 
+#thumbnails .select-buttons button {
+    margin: 0px 12px 12px 0px;
+}
+
 #word-cloud {
     text-align: center;
 }
@@ -34,8 +38,8 @@ body .ibm-code {
     width: 30%;
 }
 
-#thumbnails {
-    max-height: 75vh;
+#thumbnails .image-scroller {
+    max-height: 65vh;
     width: 100%;
     overflow: auto;
 }
@@ -48,6 +52,12 @@ body .ibm-code {
 .ibm-code .btn-primary:hover {
     background-color: #1E8B87;
     border-color: #24D8B89;
+}
+
+.ibm-code ul.thumbnails.image_picker_selector li {
+    float: none;
+    display:inline-block;
+    vertical-align: top;
 }
 
 .ibm-code  ul.thumbnails.image_picker_selector li .thumbnail.selected {

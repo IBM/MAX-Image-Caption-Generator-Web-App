@@ -64,16 +64,24 @@
             <div class="col-md-7">
 
                 <div id="thumbnails" class="well">
-                    <select multiple="multiple" class="image-picker">
-                    {% for key, value in image_captions.items() %}
-                        <option data-img-src="{{ escape(key) }}"
-                                data-img-label="{{ escape(value) }}"
-                                data-img-alt="{{ escape(value) }}"
-                                value="{{ escape(key) }}">
-                            {{ escape(value) }}
-                        </option>
-                    {% end %}
-                    </select>
+
+                    <div class="select-buttons">
+                        <button onclick="select_all(false)" class="btn btn-primary">Deselect All</button>
+                        <button onclick="select_all(true)" class="btn btn-primary">Select All</button>
+                    </div>
+
+                    <div class="image-scroller">
+                        <select multiple="multiple" class="image-picker">
+                        {% for key, value in reversed(image_captions.items()) %}
+                            <option data-img-src="{{ escape(key) }}"
+                                    data-img-label="{{ escape(value) }}"
+                                    data-img-alt="{{ escape(value) }}"
+                                    value="{{ escape(key) }}">
+                                {{ escape(value) }}
+                            </option>
+                        {% end %}
+                        </select>
+                    </div>
                 </div>
 
             </div>
@@ -90,7 +98,7 @@
 
         <footer class="footer">
             <hr/>
-            <p>Created at the IBM Center for Open-Source & AI Technologies</p>
+            <p>Created at the IBM Center for Open-Source Data & AI Technologies</p>
         </footer>
 
     </div>
