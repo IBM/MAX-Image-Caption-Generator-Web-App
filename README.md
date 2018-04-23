@@ -8,7 +8,7 @@ Before starting this web app you must setup the MAX Image Caption Generator REST
 
 https://github.com/IBM/MAX-Image-Caption-Generator
 
-You should now have the Image Caption Generator REST endpoint running at `http://localhost:5000`
+You need to have the Image Caption Generator REST endpoint running at `http://localhost:5000` for the web app to run.
 
 ### Starting the Web App
 

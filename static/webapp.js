@@ -1,5 +1,6 @@
-// javascript code for MAX web app
+// Javascript code for MAX Image Caption Generator Web App
 
+// Adds a new image to the image picker from the given return json of an upload
 function add_thumbnails(data) {
     if (get_keys().includes(data["file_name"]) == false) {
         $('#thumbnails select').prepend($("<option></option>")
@@ -10,12 +11,14 @@ function add_thumbnails(data) {
     }
 }
 
+// Returns the list of the file paths for the images (the file path is an image's key in the File Picker)
 function get_keys() {
     return $('#thumbnails select').children('option').map(function () {
         return $(this).attr('data-img-src');
     }).get();
 }
 
+// Returns a list of all the words in the captions of the currently selected images
 function get_words() {
     var all_words = [];
     $('#thumbnails .image_picker_selector .selected').children().filter("img").each(function () {
@@ -26,6 +29,7 @@ function get_words() {
     return all_words;
 }
 
+// Create word entries with weights for use in the word cloud
 function get_word_entries() {
     var words = get_words();
 
@@ -52,6 +56,7 @@ function get_word_entries() {
     return d3.entries(word_count);
 }
 
+// Generate the word cloud based on the currently selected images' captions
 function word_cloud() {
     $('#word-cloud').empty();
 
@@ -127,6 +132,7 @@ function word_cloud() {
     }
 }
 
+// Set the selected images to a subset of the current selection containing the given word in their caption
 function select_on(word) {
     var key_list = [];
     $('#thumbnails .image_picker_selector .selected').children().filter("img").each(function () {
@@ -138,6 +144,7 @@ function select_on(word) {
     set_selected_images(key_list);
 }
 
+// Initialize the Image Picker
 function set_img_picker() {
     $("#thumbnails select").imagepicker({
         show_label  : true,
@@ -147,12 +154,14 @@ function set_img_picker() {
     });
 }
 
+// Set the selected images to the given list
 function set_selected_images(imgs) {
     $("#thumbnails select").val(imgs);
     $("#thumbnails select").data('picker').sync_picker_with_select();
     word_cloud();
 }
 
+// Select or Deselect all images
 function select_all(bool) {
     if (bool) {
         set_selected_images(get_keys());
@@ -174,7 +183,7 @@ $(function() {
         var form = event.target;
         var data = new FormData(form);
 
-        // perform file upload
+        // Perform file upload
         $.ajax({
             url: "/upload",
             method: "post",

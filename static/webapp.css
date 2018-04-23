@@ -1,4 +1,4 @@
-/* style sheet for MAX web app */
+/* Style sheet for MAX Image Caption Generator Web App */
 
 body .ibm-code {
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -26,12 +26,12 @@ body .ibm-code {
     font-size: 18px;
 }
 
-#thumbnails .select-buttons button {
-    margin: 0px 12px 12px 0px;
-}
-
 #word-cloud {
     text-align: center;
+}
+
+#thumbnails .select-buttons button {
+    margin: 0px 12px 12px 0px;
 }
 
 .thumbnails li {
@@ -47,6 +47,7 @@ body .ibm-code {
 .ibm-code .btn-primary {
     background-color: #26A8A2;
     border-color: #32A8A3;
+    white-space: normal;
 }
 
 .ibm-code .btn-primary:hover {
