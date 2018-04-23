@@ -1,4 +1,4 @@
-import collections, logging, os, requests, signal, time
+import collections, json, logging, os, requests, signal, time
 from tornado import httpserver, ioloop, web
 
 
@@ -27,14 +27,17 @@ class CleanupHandler(web.RequestHandler):
 
 class UploadHandler(web.RequestHandler):
     def post(self):
-        file_des = self.request.files['file'][0]
-        file_name = temp_img_prefix + file_des['filename']
-        rel_path = static_img_path + file_name
-        output_file = open(rel_path, 'wb')
-        output_file.write(file_des['body'])
-        output_file.close()
-        caption = run_ml(rel_path)
-        self.finish({"file_name": rel_path, "caption": caption})
+        finish_ret = []
+        new_files = self.request.files['file']
+        for file_des in new_files:
+            file_name = temp_img_prefix + file_des['filename']
+            rel_path = static_img_path + file_name
+            output_file = open(rel_path, 'wb')
+            output_file.write(file_des['body'])
+            output_file.close()
+            caption = run_ml(rel_path)
+            finish_ret.append({"file_name": rel_path, "caption": caption})
+        self.finish(json.dumps(finish_ret))
 
 
 # Runs ML on given image

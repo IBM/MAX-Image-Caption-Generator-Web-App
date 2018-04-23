@@ -2,12 +2,16 @@
 
 // Adds a new image to the image picker from the given return json of an upload
 function add_thumbnails(data) {
-    if (get_keys().includes(data["file_name"]) == false) {
-        $('#thumbnails select').prepend($("<option></option>")
-            .attr("data-img-src", data["file_name"])
-            .attr("data-img-label", data["caption"])
-            .attr("data-img-alt", data["caption"])
-            .text(data["caption"]));
+    key_list = get_keys()
+    for (var i = 0; i < data.length; i++) {
+        file_data = data[i];
+        if (key_list.includes(file_data["file_name"]) == false) {
+            $('#thumbnails select').prepend($("<option></option>")
+                .attr("data-img-src", file_data["file_name"])
+                .attr("data-img-label", file_data["caption"])
+                .attr("data-img-alt", file_data["caption"])
+                .text(file_data["caption"]));
+        }
     }
 }
 
@@ -183,6 +187,8 @@ $(function() {
         var form = event.target;
         var data = new FormData(form);
 
+        $("#file-submit").text("Uploading...")
+
         // Perform file upload
         $.ajax({
             url: "/upload",
@@ -195,6 +201,8 @@ $(function() {
             success: function(data) {
                 add_thumbnails(data);
                 set_img_picker();
+                $("#file-submit").text("Submit");
+                $("#file-input").val("");
             }
         })
     })
