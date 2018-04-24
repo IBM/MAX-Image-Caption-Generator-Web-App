@@ -1,12 +1,15 @@
 import collections, json, logging, os, requests, signal, time
 from tornado import httpserver, ioloop, web
+from tornado.options import define, options, parse_command_line
 
+# Command Line Options
+define("port", default=8088, help="Port the web app will run on")
+define("ml-endpoint", default="http://localhost:5000", help="The Image Caption Generator REST endpoint")
 
 # Setup Logging
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(levelname)s: %(message)s')
 
 # Global variables
-ml_endpoint = "http://localhost:5000/model/predict"
 static_img_path = "static/img/images/"
 temp_img_prefix = "MAX-"
 image_captions = collections.OrderedDict()
@@ -80,7 +83,7 @@ def signal_handler(sig, frame):
 def shutdown():
     logging.info("Cleaning up image files")
     clean_up()
-    logging.info("Stopping server")
+    logging.info("Stopping web server")
     server.stop()
     ioloop.IOLoop.current().stop()
 
@@ -101,27 +104,32 @@ def make_app():
 
 
 def main():
+    parse_command_line()
+
+    global ml_endpoint
+    ml_endpoint = options.ml_endpoint + "/model/predict"
+    logging.debug("Connecting to ML endpoint at %s", ml_endpoint)
+
     try:
         resp = requests.get(ml_endpoint)
     except requests.exceptions.ConnectionError:
-        logging.error("Cannot connect to the Object Detection API")
-        logging.error("Please run the Object Detection API docker image first")
+        logging.error("Cannot connect to the Image Caption Generator REST endpoint at %s", options.ml_endpoint)
         raise SystemExit
 
-    logging.info("Starting Server")
-    global server
+    logging.info("Starting web server")
     app = make_app()
+    global server
     server = httpserver.HTTPServer(app)
-    server.listen(8088)
+    server.listen(options.port)
     signal.signal(signal.SIGINT, signal_handler)
 
-    logging.info("Preparing ML Metadata")
+    logging.info("Preparing ML metadata")
     start = time.time()
     prepare_metadata()
     end = time.time()
     logging.info("Metadata prepared in %s seconds", end - start)
 
-    logging.info("Use Ctrl+C to stop server")
+    logging.info("Use Ctrl+C to stop web server")
     ioloop.IOLoop.current().start()
 
 
