@@ -2,7 +2,7 @@
 
 // Adds a new image to the image picker from the given return json of an upload
 function add_thumbnails(data) {
-    key_list = get_keys()
+    var key_list = get_keys();
     for (var i = 0; i < data.length; i++) {
         file_data = data[i];
         if (key_list.includes(file_data["file_name"]) == false) {
@@ -10,6 +10,7 @@ function add_thumbnails(data) {
                 .attr("data-img-src", file_data["file_name"])
                 .attr("data-img-label", file_data["caption"])
                 .attr("data-img-alt", file_data["caption"])
+                .attr("value", file_data["file_name"])
                 .text(file_data["caption"]));
         }
     }
@@ -205,6 +206,6 @@ $(function() {
                 $("#file-input").val("");
             }
         })
-    })
+    });
 
 });
