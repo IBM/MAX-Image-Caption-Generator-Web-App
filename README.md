@@ -31,7 +31,6 @@ to map the 8088 port:
 
     docker run -it -p 5000:5000 -p 8088:8088 --name max-im2txt max-im2txt
 
-
 Build the web app image by running:
 
     docker build -t webapp .
@@ -40,10 +39,12 @@ Run the web app container using:
 
     docker run --net='container:max-im2txt' -it webapp
 
-
 ### JavaScript Libraries
 
-This web app depends on a couple of non-standard js libraries
+This web app includes the following js and css libraries
 
 - [Image Picker](http://rvera.github.io/image-picker/)
-- [d3 word cloud](https://github.com/jasondavies/d3-cloud)
+- [d3-cloud](https://github.com/jasondavies/d3-cloud)
+- [D3.js](https://d3js.org)
+- [Bootstrap 3](https://getbootstrap.com)
+- [JQuery](https://jquery.com)
