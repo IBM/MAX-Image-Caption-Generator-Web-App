@@ -7,7 +7,7 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(levelnam
 
 # Global variables
 ml_endpoint = "http://localhost:5000/model/predict"
-static_img_path = "static/img/"
+static_img_path = "static/img/images/"
 temp_img_prefix = "MAX-"
 image_captions = collections.OrderedDict()
 
@@ -36,7 +36,7 @@ class UploadHandler(web.RequestHandler):
             output_file.write(file_des['body'])
             output_file.close()
             caption = run_ml(rel_path)
-            finish_ret.append({"file_name": rel_path, "caption": caption})
+            finish_ret.append({"file_name": rel_path, "caption": caption[0]['caption']})
         self.finish(json.dumps(finish_ret))
 
 
@@ -45,7 +45,7 @@ def run_ml(img_path):
     img_file = {'image': open(img_path, 'rb')}
     r = requests.post(url=ml_endpoint, files=img_file)
     cap_json = r.json()
-    caption = cap_json['predictions'][0]['caption']
+    caption = cap_json['predictions']
     image_captions[img_path] = caption
     return caption
 

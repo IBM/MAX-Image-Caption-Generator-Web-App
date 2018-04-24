@@ -7,16 +7,15 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="static/image-picker.css" rel="stylesheet">
-    <link href="static/webapp.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/image-picker.css">
+    <link rel="stylesheet" href="static/css/webapp.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
-    <script src="static/image-picker.min.js"></script>
-    <script src="static/webapp.js"></script>
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/d3.min.js"></script>
+    <script src="static/js/d3.layout.cloud.js"></script>
+    <script src="static/js/image-picker.min.js"></script>
+    <script src="static/js/webapp.js"></script>
 
 </head>
 
@@ -29,7 +28,7 @@
             <div class="col-md-7">
 
                 <div id="codait-logo" class="col-md-3">
-                    <img src="static/codait-logo.jpg"/>
+                    <img src="static/img/codait-logo.jpg"/>
                 </div>
 
                 <div class="col-md-4 title-section">
@@ -77,10 +76,10 @@
                         <select multiple="multiple" class="image-picker">
                         {% for key, value in reversed(image_captions.items()) %}
                             <option data-img-src="{{ escape(key) }}"
-                                    data-img-label="{{ escape(value) }}"
-                                    data-img-alt="{{ escape(value) }}"
+                                    data-img-label="{{ escape(value[0]['caption']) }}"
+                                    data-img-alt="{{ escape(value[0]['caption']) }}"
                                     value="{{ escape(key) }}">
-                                {{ escape(value) }}
+                                {{ escape(value[0]['caption']) }}
                             </option>
                         {% end %}
                         </select>
