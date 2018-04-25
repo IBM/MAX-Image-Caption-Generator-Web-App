@@ -10,7 +10,7 @@ Before starting this web app you must setup the MAX Image Caption Generator REST
 
 ## Starting the Web App
 
-Before running this web app you must install it's dependencies:
+Before running this web app you must install its dependencies:
 
     pip install requests tornado
 
@@ -18,10 +18,12 @@ You then start the web app by running:
 
     python app.py
 
-Once it's finished processing the default images (< 1 minute) you can then access the web app at: 
+Once it's finished processing the default images (< 1 minute) you can then access the web app at:
 [http://localhost:8088](http://localhost:8088)
 
 The Image Caption Generator endpoint must be available at `http://localhost:5000` for the web app to successfully start.
+
+### Configuring ports
 
 If you want to use a different port or are running the ML endpoint at a different location
 you can change them with command-line options:
@@ -30,12 +32,13 @@ you can change them with command-line options:
 
 ## Instructions for Docker
 
-To run the web app with Docker you need to allow the containers running the web
-server and the REST endpoint to share the same network stack. This is done in
-the following steps.
+To run the web app with Docker the containers running the webserver and the REST
+endpoint need to share the same network stack. This is done in the following steps.
 
 Modify the command that runs the Image Caption Generator REST endpoint
-to map the 8088 port:
+to map an additional port in the container to a port on the host machine.
+In the example below it is mapped to port 8088 on the host but other ports
+can also be used.
 
     docker run -it -p 5000:5000 -p 8088:8088 --name max-im2txt max-im2txt
 
