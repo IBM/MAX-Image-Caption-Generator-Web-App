@@ -20,6 +20,18 @@ class MainHandler(web.RequestHandler):
         self.render("index.html", image_captions=image_captions)
 
 
+class DetailHandler(web.RequestHandler):
+    def get(self):
+        image = self.get_argument('image', None)
+        if not image:
+            self.set_status(400)
+            return self.finish("400: Missing image parameter")
+        if image not in image_captions:
+            self.set_status(404)
+            return self.finish("404: Image not found")
+        self.render("detail-snippet.html", image=image, predictions=image_captions[image])
+
+
 class CleanupHandler(web.RequestHandler):
     def get(self):
         self.render("cleanup.html")
@@ -92,7 +104,8 @@ def make_app():
     handlers = [
         (r"/", MainHandler),
         (r"/upload", UploadHandler),
-        (r"/cleanup", CleanupHandler)
+        (r"/cleanup", CleanupHandler),
+        (r"/detail", DetailHandler)
     ]
 
     configs = {

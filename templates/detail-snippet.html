@@ -1,0 +1,19 @@
+<div class="image-detail">
+
+    <img src="{{ escape(image) }}" style="max-width: 100%;">
+
+    <div style="margin: 25px;">
+
+        <h4>Top 3 Captions Generated:</h4>
+
+        <ol>
+            {% for prediction in predictions %}
+                {% if prediction['index'] == "0" %}<b>{% end %}
+                <li>{{ prediction['caption'] }}</li>
+                {% if prediction['index'] == "0" %}</b>{% end %}
+            {% end %}
+        </ol>
+
+    </div>
+
+</div>

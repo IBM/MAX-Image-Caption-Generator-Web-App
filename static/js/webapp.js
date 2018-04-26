@@ -152,7 +152,17 @@ function select_on(word) {
 // Initialize the Image Picker
 function set_img_picker() {
     $("#thumbnails select").imagepicker({
-        show_label  : true,
+        show_label: true,
+        initialized: function() {
+            $(".thumbnail").each(function() {
+                var img_file = $(this).children('img').attr('src');
+                $("<a href='#'/>")
+                    .attr("class", "glyphicon glyphicon-resize-full more-info-icon")
+                    .attr("data-featherlight", "/detail?image=" + img_file + " .image-detail")
+                    .prependTo($(this));
+            });
+            $('a.more-info-icon').featherlight('ajax');
+        },
         clicked: function() {
             word_cloud();
         }
@@ -208,4 +218,8 @@ $(function() {
         })
     });
 
+    // Stop propagation so images aren't 'selected' when the more info icon is clicked
+    $('.more-info-icon').on('click', function(e) {
+        e.stopPropagation();
+    });
 });

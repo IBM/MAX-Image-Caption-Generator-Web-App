@@ -57,5 +57,7 @@ This web app includes the following js and css libraries
 - [Image Picker](http://rvera.github.io/image-picker/)
 - [d3-cloud](https://github.com/jasondavies/d3-cloud)
 - [D3.js](https://d3js.org)
-- [Bootstrap 3](https://getbootstrap.com)
+- [Featherlight](https://noelboss.github.io/featherlight/)
 - [JQuery](https://jquery.com)
+- [Bootstrap 3](https://getbootstrap.com)
+- [Glyphicons](http://glyphicons.com)

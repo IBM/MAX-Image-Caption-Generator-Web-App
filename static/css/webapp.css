@@ -1,6 +1,6 @@
 /* Style sheet for MAX Image Caption Generator Web App */
 
-body .ibm-code {
+body {
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -62,5 +62,40 @@ body .ibm-code {
 }
 
 .ibm-code  ul.thumbnails.image_picker_selector li .thumbnail.selected {
+    background: #5FBFBB;
+}
+
+.ibm-code .thumbnail {
+    display: inline-block;
+    position: relative;
+}
+
+.thumbnails .more-info-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    font-size: 1.2em;
+}
+
+a.more-info-icon {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.thumbnails .selected .more-info-icon {
+    background: #5FBFBB;
+}
+
+.featherlight .featherlight-content {
+    border-radius: 4px;
+    background: #5FBFBB;
+    border-bottom: 0;
+    max-width: 100vh;
+}
+
+.featherlight .featherlight-close-icon {
     background: #5FBFBB;
 }
