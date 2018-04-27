@@ -50,14 +50,16 @@ Run the web app container using:
 
     docker run --net='container:max-im2txt' -it webapp
 
-## JavaScript Libraries
+## Third-Party Sources
 
-This web app includes the following js and css libraries
+This web app includes the following third-party javascript and css libraries
 
-- [Image Picker](http://rvera.github.io/image-picker/)
-- [d3-cloud](https://github.com/jasondavies/d3-cloud)
-- [D3.js](https://d3js.org)
-- [Featherlight](https://noelboss.github.io/featherlight/)
-- [JQuery](https://jquery.com)
 - [Bootstrap 3](https://getbootstrap.com)
+- [D3.js](https://d3js.org)
+- [d3-cloud](https://github.com/jasondavies/d3-cloud)
+- [Featherlight](https://noelboss.github.io/featherlight/)
 - [Glyphicons](http://glyphicons.com)
+- [Image Picker](http://rvera.github.io/image-picker/)
+- [JQuery](https://jquery.com)
+
+The default image set was curated from [Pexels](https://www.pexels.com)
