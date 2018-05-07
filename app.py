@@ -138,8 +138,11 @@ def main():
     parse_command_line()
 
     global ml_endpoint
-    ml_endpoint = options.ml_endpoint + "/model/predict"
-    logging.debug("Connecting to ML endpoint at %s", ml_endpoint)
+    ml_endpoint = options.ml_endpoint
+    if '/model/predict' not in options.ml_endpoint:
+        ml_endpoint = options.ml_endpoint + "/model/predict"
+
+    logging.info("Connecting to ML endpoint at %s", ml_endpoint)
 
     try:
         resp = requests.get(ml_endpoint)
