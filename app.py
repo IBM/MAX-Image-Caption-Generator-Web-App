@@ -70,6 +70,7 @@ class UploadHandler(web.RequestHandler):
             output_file.close()
             caption = run_ml(rel_path)
             finish_ret.append({"file_name": rel_path, "caption": caption[0]['caption']})
+        sort_image_captions()
         self.finish(json.dumps(finish_ret))
 
 
@@ -81,6 +82,12 @@ def run_ml(img_path):
     caption = cap_json['predictions']
     image_captions[img_path] = caption
     return caption
+
+
+def sort_image_captions():
+    global image_captions
+    image_captions = collections.OrderedDict(sorted(image_captions.items(), key=lambda t: t[0].lower()))
+    logging.info(image_captions)
 
 
 # Gets list of images with relative paths from static dir
@@ -106,6 +113,7 @@ def prepare_metadata():
         t.join()
 
     threads.clear()
+    sort_image_captions()
 
 
 # Deletes all files uploaded through the GUI and removes them from the dict
