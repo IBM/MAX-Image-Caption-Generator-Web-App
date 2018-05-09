@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-import collections, json, logging, os, requests, signal, time
+import collections, json, logging, os, requests, signal, time, threading
 from tornado import httpserver, ioloop, web
 from tornado.options import define, options, parse_command_line
 
@@ -92,9 +92,20 @@ def get_image_list():
 
 # Run all static images through ML
 def prepare_metadata():
+    threads = []
+
     rel_img_list = get_image_list()
     for img in rel_img_list:
-        run_ml(img)
+        t = threading.Thread(target=run_ml, args=(img,))
+        threads.append(t)
+
+    for t in threads:
+        t.start()
+
+    for t in threads:
+        t.join()
+
+    threads.clear()
 
 
 # Deletes all files uploaded through the GUI and removes them from the dict
