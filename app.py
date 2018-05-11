@@ -64,14 +64,22 @@ class UploadHandler(web.RequestHandler):
         new_files = self.request.files['file']
         for file_des in new_files:
             file_name = temp_img_prefix + file_des['filename']
-            rel_path = static_img_path + file_name
-            output_file = open(rel_path, 'wb')
-            output_file.write(file_des['body'])
-            output_file.close()
-            caption = run_ml(rel_path)
-            finish_ret.append({"file_name": rel_path, "caption": caption[0]['caption']})
+            if valid_file_ext(file_name):
+                rel_path = static_img_path + file_name
+                output_file = open(rel_path, 'wb')
+                output_file.write(file_des['body'])
+                output_file.close()
+                caption = run_ml(rel_path)
+                finish_ret.append({"file_name": rel_path, "caption": caption[0]['caption']})
+        if not finish_ret:
+            self.send_error(400)
+            return
         sort_image_captions()
         self.finish(json.dumps(finish_ret))
+
+
+def valid_file_ext(filename):
+    return '.' in filename and filename.split('.', 1)[1].lower() in ['png', 'jpg', 'jpeg', 'gif']
 
 
 # Runs ML on given image
@@ -87,7 +95,6 @@ def run_ml(img_path):
 def sort_image_captions():
     global image_captions
     image_captions = collections.OrderedDict(sorted(image_captions.items(), key=lambda t: t[0].lower()))
-    logging.info(image_captions)
 
 
 # Gets list of images with relative paths from static dir

@@ -214,24 +214,31 @@ $(function() {
         var form = event.target;
         var data = new FormData(form);
 
-        $("#file-submit").text("Uploading...")
+        if ($("#file-input").val() != "") {
+            $("#file-submit").text("Uploading...")
 
-        // Perform file upload
-        $.ajax({
-            url: "/upload",
-            method: "post",
-            processData: false,
-            contentType: false,
-            data: data,
-            processData: false,
-            dataType: "json",
-            success: function(data) {
-                add_thumbnails(data);
-                set_img_picker();
-                $("#file-submit").text("Submit");
-                $("#file-input").val("");
-            }
-        })
+            // Perform file upload
+            $.ajax({
+                url: "/upload",
+                method: "post",
+                processData: false,
+                contentType: false,
+                data: data,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    add_thumbnails(data);
+                    set_img_picker();
+                },
+                error: function() {
+                    alert("Must submit a valid file (png, jpeg, jpg, or gif)");
+                },
+                complete: function() {
+                    $("#file-submit").text("Submit");
+                    $("#file-input").val("");
+                }
+            })
+        }
     });
 
     // Stop propagation so images aren't 'selected' when the more info icon is clicked
