@@ -183,7 +183,7 @@ def main():
     server.listen(options.port)
     signal.signal(signal.SIGINT, signal_handler)
 
-    logging.info("Preparing ML metadata")
+    logging.info("Preparing ML metadata (this may take some time)")
     start = time.time()
     prepare_metadata()
     end = time.time()

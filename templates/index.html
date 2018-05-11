@@ -65,7 +65,11 @@ limitations under the License.
                         <div class="panel-body">
                             <form id="img-upload" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <input id="file-input" type="file" name="file" multiple />
+                                    <input id="file-input"
+                                           type="file"
+                                           name="file"
+                                           accept=".png, .jpg, .jpeg, .gif"
+                                           multiple />
                                 </div>
                                 <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
                             </form>
