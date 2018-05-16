@@ -41,25 +41,17 @@ free and open source deep learning models.
 
 * [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate
 your systems more effectively.
-
 * [Bootstrap 3](https://getbootstrap.com): Bootstrap is a free and open-source front-end library for designing websites
 and web applications.
-
 * [D3.js](https://d3js.org): D3.js is a JavaScript library for manipulating documents based on data.
-
 * [d3-cloud](https://github.com/jasondavies/d3-cloud): A Wordle-inspired word cloud layout written in JavaScript.
-
 * [Featherlight](https://noelboss.github.io/featherlight/): Featherlight is a very lightweight jQuery lightbox plugin.
-
 * [Glyphicons](http://glyphicons.com): GLYPHICONS is a library of precisely prepared monochromatic icons and symbols,
 created with an emphasis to simplicity and easy orientation.
-
 * [Image Picker](http://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select
 element into a more user friendly graphical interface.
-
 * [JQuery](https://jquery.com): jQuery is a cross-platform JavaScript library designed to simplify the client-side
 scripting of HTML.
-
 * [Pexels](https://www.pexels.com): Pexels provides high quality and completely free stock photos licensed under the
 Creative Commons Zero (CC0) license.
 
