@@ -22,7 +22,6 @@ When the reader has completed this Code Pattern, they will understand how to:
 * Generate captions for an image using the MAX Model's REST API
 * Run a web application that using the model's REST API
 
-
 # Steps
 
 ## Setting up the MAX Model
@@ -49,9 +48,7 @@ All required model assets will be downloaded during the build process. _Note_ th
 
 To run the docker image, which automatically starts the model serving API, run:
 
-
     docker run -it -p 5000:5000 max-im2txt
-
 
 ### 3. Experimenting with the API (Optional)
 
@@ -105,7 +102,7 @@ Once it's finished processing the default images (< 1 minute) you can then acces
 
 The Image Caption Generator endpoint must be available at `http://localhost:5000` for the web app to successfully start.
 
-![Web UI Screenshot](assets/webui.png)
+![Web UI Screenshot](doc/source/images/webui.png)
 
 ### Configuring ports (Optional)
 
