@@ -8,7 +8,7 @@ A lot of that data is unstructured data, such as large texts, audio recordings, 
 useful with the data, we must first convert it to structured data.
 
 In this Code Pattern we will use one of the models from the
-[Model Asset Exchange](https://developer.ibm.com/code/exchanges/models/),
+[Model Asset Exchange (MAX)](https://developer.ibm.com/code/exchanges/models/),
 an exchange where developers can find and experiment with open source deep learning
 models. Specifically we will be using the [Image Caption Generator](https://github.com/IBM/MAX-Image-Caption-Generator)
 to create a web application that will caption images and allow the user to filter through
@@ -32,10 +32,14 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 <!-- TODO: Add Flow Steps -->
 
+<!-- TODO: Make sure Components, Technologies, Links, and Learn More bullets are in the correct sections -->
+
 ## Included Components
 
-* [IBM Model Asset Exchange (MAX)](https://developer.ibm.com/code/exchanges/models/): A place for developers to find and use
+* [IBM Model Asset Exchange](https://developer.ibm.com/code/exchanges/models/): A place for developers to find and use
 free and open source deep learning models.
+* [Docker](https://www.docker.com): Docker is a tool designed to make it easier to create, deploy, and run applications
+by using containers.
 
 ## Featured Technologies
 
