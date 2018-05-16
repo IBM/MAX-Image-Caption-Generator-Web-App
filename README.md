@@ -34,7 +34,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Included Components
 
-* [IBM Model Asset Exchange](https://developer.ibm.com/code/exchanges/models/): A place for developers to find and use
+* [IBM Model Asset Exchange (MAX)](https://developer.ibm.com/code/exchanges/models/): A place for developers to find and use
 free and open source deep learning models.
 
 ## Featured Technologies
@@ -170,7 +170,7 @@ you can change them with command-line options:
 #### Instructions for Docker (Optional)
 
 To run the web app with Docker the containers running the webserver and the REST endpoint need toshare the same
-network stack. This is done in the following steps.
+network stack. This is done in the following steps:
 
 Modify the command that runs the Image Caption Generator REST endpoint to map an additional port in the container to a
 port on the host machine. In the example below it is mapped to port 8088 on the host but other ports can also be used.
