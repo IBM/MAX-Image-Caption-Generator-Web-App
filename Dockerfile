@@ -18,7 +18,7 @@ FROM  python:alpine
 
 COPY . /app
 WORKDIR /app
-RUN pip install requests tornado
+RUN pip install -r requirements.txt
 
 EXPOSE 8088
 CMD python app.py

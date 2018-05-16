@@ -91,7 +91,7 @@ You can also test it on the command line, for example:
 
 Before running this web app you must install its dependencies:
 
-    pip install requests tornado
+    pip install -r requirements.txt
 
 You then start the web app by running:
 
