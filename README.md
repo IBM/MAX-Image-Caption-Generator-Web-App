@@ -1,4 +1,5 @@
-<!-- TODO: Add badges for CI status and IBM Cloud deploy count -->
+[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
+<!-- TODO: Add badge for IBM Cloud deploy count -->
 
 # Use a deep learning model to filter images in a web application
 
