@@ -1,4 +1,5 @@
-<!-- TODO: Add badges for CI status and IBM Cloud deploy count -->
+[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
+<!-- TODO: Add badge for IBM Cloud deploy count -->
 
 # Use a deep learning model to filter images in a web application
 
@@ -145,7 +146,7 @@ You can also test it on the command line, for example:
 
 Before running this web app you must install its dependencies:
 
-    pip install requests tornado
+    pip install -r requirements.txt
 
 You then start the web app by running:
 

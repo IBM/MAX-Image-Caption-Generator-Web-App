@@ -16,21 +16,31 @@
 # limitations under the License.
 #
 
-import collections, json, logging, os, requests, signal, time, threading
+import collections
+import json
+import logging
+import os
+import requests
+import signal
+import time
+import threading
 from tornado import httpserver, ioloop, web
 from tornado.options import define, options, parse_command_line
 
 # Command Line Options
 define("port", default=8088, help="Port the web app will run on")
-define("ml-endpoint", default="http://localhost:5000", help="The Image Caption Generator REST endpoint")
+define("ml-endpoint", default="http://localhost:5000",
+       help="The Image Caption Generator REST endpoint")
 
 # Setup Logging
-logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(levelname)s: %(message)s')
+logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"),
+                    format='%(levelname)s: %(message)s')
 
 # Global variables
 static_img_path = "static/img/images/"
 temp_img_prefix = "MAX-"
 image_captions = collections.OrderedDict()
+VALID_EXT = ['png', 'jpg', 'jpeg', 'gif']
 
 
 class MainHandler(web.RequestHandler):
@@ -47,7 +57,8 @@ class DetailHandler(web.RequestHandler):
         if image not in image_captions:
             self.set_status(404)
             return self.finish("404: Image not found")
-        self.render("detail-snippet.html", image=image, predictions=image_captions[image])
+        self.render("detail-snippet.html", image=image,
+                    predictions=image_captions[image])
 
 
 class CleanupHandler(web.RequestHandler):
@@ -70,7 +81,10 @@ class UploadHandler(web.RequestHandler):
                 output_file.write(file_des['body'])
                 output_file.close()
                 caption = run_ml(rel_path)
-                finish_ret.append({"file_name": rel_path, "caption": caption[0]['caption']})
+                finish_ret.append({
+                    "file_name": rel_path,
+                    "caption": caption[0]['caption']
+                })
         if not finish_ret:
             self.send_error(400)
             return
@@ -79,7 +93,7 @@ class UploadHandler(web.RequestHandler):
 
 
 def valid_file_ext(filename):
-    return '.' in filename and filename.split('.', 1)[1].lower() in ['png', 'jpg', 'jpeg', 'gif']
+    return '.' in filename and filename.split('.', 1)[1].lower() in VALID_EXT
 
 
 # Runs ML on given image
@@ -94,7 +108,8 @@ def run_ml(img_path):
 
 def sort_image_captions():
     global image_captions
-    image_captions = collections.OrderedDict(sorted(image_captions.items(), key=lambda t: t[0].lower()))
+    image_captions = collections.OrderedDict(
+        sorted(image_captions.items(), key=lambda t: t[0].lower()))
 
 
 # Gets list of images with relative paths from static dir
@@ -119,7 +134,6 @@ def prepare_metadata():
     for t in threads:
         t.join()
 
-    threads.clear()
     sort_image_captions()
 
 
@@ -171,9 +185,11 @@ def main():
     logging.info("Connecting to ML endpoint at %s", ml_endpoint)
 
     try:
-        resp = requests.get(ml_endpoint)
+        requests.get(ml_endpoint)
     except requests.exceptions.ConnectionError:
-        logging.error("Cannot connect to the Image Caption Generator REST endpoint at %s", options.ml_endpoint)
+        logging.error(
+            "Cannot connect to the Image Caption Generator REST endpoint at " +
+            options.ml_endpoint)
         raise SystemExit
 
     logging.info("Starting web server")
