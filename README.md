@@ -70,6 +70,8 @@ Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 
 ## Deploy to IBM Cloud
 
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/MAX-Image-Caption-Generator-Web-App)
+
 <!-- TODO: Add IBM Cloud deploy steps -->
 
 ## Deploy Locally
