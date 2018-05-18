@@ -86,7 +86,18 @@ Generator endpoint is provided and a new one is not created on your IBM Cloud ac
 
 > NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
 
-<!-- TODO: Add Setup TOC -->
+#### Setting up the MAX Model
+
+1. [Build the Model](#1-build-the-model)
+2. [Deploy the Model](#2-deploy-the-model)
+3. [Experimenting with the API (Optional)](#3-experimenting-with-the-api-optional)
+
+#### Starting the Web App
+
+1. [Installing dependencies](#1-installing-dependencies)
+2. [Running the server](#2-running-the-server)
+3. [Configuring ports (Optional)](#3-configuring-ports-optional)
+4. [Instructions for Docker (Optional)](#4-instructions-for-docker-optional)
 
 ### Setting up the MAX Model
 
@@ -108,6 +119,7 @@ To build the docker image locally, run:
     docker build -t max-im2txt .
 
 All required model assets will be downloaded during the build process.
+
 _Note_ that currently this docker image is CPU only (we will add support for GPU images later).
 
 #### 2. Deploy the Model
@@ -152,11 +164,13 @@ You can also test it on the command line, for example:
 
 ### Starting the Web App
 
-#### 1. Installing dependencies and running the server
+#### 1. Installing dependencies
 
 Before running this web app you must install its dependencies:
 
     pip install -r requirements.txt
+
+#### 2. Running the server
 
 You then start the web app by running:
 
@@ -167,14 +181,14 @@ Once it's finished processing the default images (< 1 minute) you can then acces
 
 The Image Caption Generator endpoint must be available at `http://localhost:5000` for the web app to successfully start.
 
-#### Configuring ports (Optional)
+#### 3. Configuring ports (Optional)
 
 If you want to use a different port or are running the ML endpoint at a different location
 you can change them with command-line options:
 
     python app.py --port=[new port] --ml-endpoint=[endpoint url including protocol and port]
 
-#### Instructions for Docker (Optional)
+#### 4. Instructions for Docker (Optional)
 
 To run the web app with Docker the containers running the webserver and the REST endpoint need toshare the same
 network stack. This is done in the following steps:
