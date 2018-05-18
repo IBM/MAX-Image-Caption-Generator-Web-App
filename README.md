@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
-<!-- TODO: Add badge for IBM Cloud deploy count -->
 
 # Use a deep learning model to filter images in a web application
 
@@ -70,9 +69,20 @@ Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 
 ## Deploy to IBM Cloud
 
-<!-- TODO: Add IBM Cloud deploy steps -->
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/MAX-Image-Caption-Generator-Web-App)
 
-## Deploy Locally
+1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``. If you do not have an IBM Cloud account
+yet, you will need to create one.
+
+2. In Toolchains, click on ``Delivery Pipeline`` to watch while the app is deployed. Once deployed, the app can be
+viewed by clicking ``View app``.
+
+![Deploy to IBM Cloud](doc/source/images/ibm-cloud-deploy.png)
+
+> Note: When deploying to IBM Cloud, by clicking the ``Deploy to IBM Cloud`` button above, a public Image Caption
+Generator endpoint is provided and a new one is not created on your IBM Cloud account.
+
+## Run Locally
 
 > NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
 
@@ -80,7 +90,7 @@ Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 
 ### Setting up the MAX Model
 
-Note: The set of instructions in this section are a modified version of the one found on the
+> NOTE: The set of instructions in this section are a modified version of the one found on the
 [Image Caption Generator Project Page](https://github.com/IBM/MAX-Image-Caption-Generator)
 
 #### 1. Build the Model
