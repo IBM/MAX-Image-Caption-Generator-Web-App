@@ -30,13 +30,10 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Flow
 
-1. Server initializes by sending default images to Model API and receiving caption data.
-2. Server starts Web UI with default images and caption data.
-3. User interacts with Web UI containing default images and caption data.
-4. User uploads image(s) to the Server via Web UI.
-5. Server sends image(s) to Model API and receives caption data.
-6. Server returns new caption data to Web UI.
-7. Web UI displays the new image(s) and caption data.
+1. Server sends default images to Model API and receives caption data.
+2. User interacts with Web UI containing default content and uploads image(s).
+3. Web UI requests caption data for image(s) from Server and updates content with returned data.
+4. Server sends image(s) to Model API and receives caption data to return to Web UI.
 
 <!-- TODO: Make sure Components, Technologies, Links, and Learn More bullets are in the correct sections -->
 
