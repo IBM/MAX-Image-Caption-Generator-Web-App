@@ -190,11 +190,11 @@ you can change them with command-line options:
 
 #### 4. Instructions for Docker (Optional)
 
-To run the web app with Docker the containers running the webserver and the REST endpoint need toshare the same
+To run the web app with Docker the containers running the webserver and the REST endpoint need to share the same
 network stack. This is done in the following steps:
 
 Modify the command that runs the Image Caption Generator REST endpoint to map an additional port in the container to a
-port on the host machine. In the example below it is mapped to port 8088 on the host but other ports can also be used.
+port on the host machine. In the example below it is mapped to port `8088` on the host but other ports can also be used.
 
     docker run -it -p 5000:5000 -p 8088:8088 --name max-im2txt max-im2txt
 
