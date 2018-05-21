@@ -26,11 +26,17 @@ When the reader has completed this Code Pattern, they will understand how to:
 * Generate captions for an image using the MAX Model's REST API
 * Run a web application that using the model's REST API
 
-<!-- TODO: Insert Arch diagram -->
+![Architecture](doc/source/images/architecture.jpg)
 
 ## Flow
 
-<!-- TODO: Add Flow Steps -->
+1. Server initializes by sending default images to Model API and receiving caption data.
+2. Server starts Web UI with default images and caption data.
+3. User interacts with Web UI containing default images and caption data.
+4. User uploads image(s) to the Server via Web UI.
+5. Server sends image(s) to Model API and receives caption data.
+6. Server returns new caption data to Web UI.
+7. Web UI displays the new image(s) and caption data.
 
 <!-- TODO: Make sure Components, Technologies, Links, and Learn More bullets are in the correct sections -->
 
@@ -177,7 +183,7 @@ You then start the web app by running:
     python app.py
 
 Once it's finished processing the default images (< 1 minute) you can then access the web app at:
-[http://localhost:8088](http://localhost:8088)
+[`http://localhost:8088`](http://localhost:8088)
 
 The Image Caption Generator endpoint must be available at `http://localhost:5000` for the web app to successfully start.
 
@@ -190,11 +196,11 @@ you can change them with command-line options:
 
 #### 4. Instructions for Docker (Optional)
 
-To run the web app with Docker the containers running the webserver and the REST endpoint need toshare the same
+To run the web app with Docker the containers running the webserver and the REST endpoint need to share the same
 network stack. This is done in the following steps:
 
 Modify the command that runs the Image Caption Generator REST endpoint to map an additional port in the container to a
-port on the host machine. In the example below it is mapped to port 8088 on the host but other ports can also be used.
+port on the host machine. In the example below it is mapped to port `8088` on the host but other ports can also be used.
 
     docker run -it -p 5000:5000 -p 8088:8088 --name max-im2txt max-im2txt
 
