@@ -32,7 +32,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 1. Server sends default images to Model API and receives caption data.
 2. User interacts with Web UI containing default content and uploads image(s).
-3. Web UI requests caption data for image(s) from Server and updates content with returned data.
+3. Web UI requests caption data for image(s) from Server and updates content when data is returned.
 4. Server sends image(s) to Model API and receives caption data to return to Web UI.
 
 <!-- TODO: Make sure Components, Technologies, Links, and Learn More bullets are in the correct sections -->
