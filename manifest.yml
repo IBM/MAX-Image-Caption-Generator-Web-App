@@ -4,4 +4,4 @@ applications:
   memory: 256M
   name: MAX-Image-Caption-Generator-Web-App
   path: .
-  command: python app.py -port=$PORT -ml-endpoint=http://184.172.242.149:30420/model/predict
+  command: python app.py -port=$PORT -ml-endpoint=http://184.172.242.55:32229/model/predict
