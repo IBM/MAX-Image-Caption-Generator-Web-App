@@ -35,32 +35,19 @@ When the reader has completed this Code Pattern, they will understand how to:
 3. Web UI requests caption data for image(s) from Server and updates content when data is returned.
 4. Server sends image(s) to Model API and receives caption data to return to Web UI.
 
-<!-- TODO: Make sure Components, Technologies, Links, and Learn More bullets are in the correct sections -->
-
 ## Included Components
 
 * [IBM Model Asset Exchange](https://developer.ibm.com/code/exchanges/models/): A place for developers to find and use
 free and open source deep learning models.
-* [Docker](https://www.docker.com): Docker is a tool designed to make it easier to create, deploy, and run applications
-by using containers.
 
 ## Featured Technologies
 
 * [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate
 your systems more effectively.
-* [Bootstrap 3](https://getbootstrap.com): Bootstrap is a free and open-source front-end library for designing websites
-and web applications.
-* [D3.js](https://d3js.org): D3.js is a JavaScript library for manipulating documents based on data.
-* [d3-cloud](https://github.com/jasondavies/d3-cloud): A Wordle-inspired word cloud layout written in JavaScript.
-* [Featherlight](https://noelboss.github.io/featherlight/): Featherlight is a very lightweight jQuery lightbox plugin.
-* [Glyphicons](http://glyphicons.com): GLYPHICONS is a library of precisely prepared monochromatic icons and symbols,
-created with an emphasis to simplicity and easy orientation.
-* [Image Picker](http://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select
-element into a more user friendly graphical interface.
 * [JQuery](https://jquery.com): jQuery is a cross-platform JavaScript library designed to simplify the client-side
 scripting of HTML.
-* [Pexels](https://www.pexels.com): Pexels provides high quality and completely free stock photos licensed under the
-Creative Commons Zero (CC0) license.
+* [Docker](https://www.docker.com): Docker is a tool designed to make it easier to create, deploy, and run applications
+by using containers.
 
 # Watch the Video
 
@@ -215,13 +202,32 @@ Run the web app container using:
 
 # Troubleshooting
 
-<!-- TODO: Add Common Troubleshooting Issues -->
+There is a large amount of user uploaded images in a long running web app
 
-<!-- Idea: Explain cleanup page here? -->
+> When running the web app at `http://localhost:8088` an admin page is available at
+[`http://localhost:8088/cleanup`](http://localhost:8088/cleanup) that allows the user to delete all user uploaded
+files from the server. [Note: This deletes all user uploaded images]
+
+![Admin UI Screenshot](doc/source/images/cleanup.png)
 
 # Links
 
-<!-- TODO: Add Links -->
+* [Model Asset eXchange (MAX)](https://developer.ibm.com/code/exchanges/models/)
+* [Center for Open-Source Data & AI Technologies (CODAIT)](https://developer.ibm.com/code/open/centers/codait/)
+* [MAX Announcement Blog](https://developer.ibm.com/code/2018/03/20/igniting-a-community-around-deep-learning-models-with-model-asset-exchange-max/)
+
+## Libraries
+* [Bootstrap 3](https://getbootstrap.com): Bootstrap is a free and open-source front-end library for designing websites
+and web applications.
+* [D3.js](https://d3js.org): D3.js is a JavaScript library for manipulating documents based on data.
+* [d3-cloud](https://github.com/jasondavies/d3-cloud): A Wordle-inspired word cloud layout written in JavaScript.
+* [Featherlight](https://noelboss.github.io/featherlight/): Featherlight is a very lightweight jQuery lightbox plugin.
+* [Glyphicons](http://glyphicons.com): GLYPHICONS is a library of precisely prepared monochromatic icons and symbols,
+created with an emphasis to simplicity and easy orientation.
+* [Image Picker](http://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select
+element into a more user friendly graphical interface.
+* [Pexels](https://www.pexels.com): Pexels provides high quality and completely free stock photos licensed under the
+Creative Commons Zero (CC0) license.
 
 # Learn More
 
