@@ -205,8 +205,10 @@ Run the web app container using:
 There is a large amount of user uploaded images in a long running web app
 
 > When running the web app at `http://localhost:8088` an admin page is available at
-[`http://localhost:8088/cleanup`](http://localhost:8088/cleanup) that allows the user to delete all user uploaded
-files from the server. [Note: This deletes all user uploaded images]
+> [`http://localhost:8088/cleanup`](http://localhost:8088/cleanup) that allows the user to delete all user uploaded
+> files from the server.
+>
+> [Note: This deletes **all** user uploaded images]
 
 ![Admin UI Screenshot](doc/source/images/cleanup.png)
 
