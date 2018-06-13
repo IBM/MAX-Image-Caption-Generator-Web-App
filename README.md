@@ -39,14 +39,19 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 * [IBM Model Asset Exchange](https://developer.ibm.com/code/exchanges/models/): A place for developers to find and use
 free and open source deep learning models.
-* [Docker](https://www.docker.com): Docker is a tool designed to make it easier to create, deploy, and run applications by using containers.
+* [Docker](https://www.docker.com): Docker is a tool designed to make it easier to create, deploy, and run applications
+by using containers.
 
 ## Featured Technologies
 
-* [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate your systems more effectively.
-* [JQuery](https://jquery.com): jQuery is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML.
-* [Bootstrap 3](https://getbootstrap.com): Bootstrap is a free and open-source front-end library for designing websites and web applications.
-* [Pexels](https://www.pexels.com): Pexels provides high quality and completely free stock photos licensed under the Creative Commons Zero (CC0) license.
+* [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate
+your systems more effectively.
+* [JQuery](https://jquery.com): jQuery is a cross-platform JavaScript library designed to simplify the client-side
+scripting of HTML.
+* [Bootstrap 3](https://getbootstrap.com): Bootstrap is a free and open-source front-end library for designing websites
+and web applications.
+* [Pexels](https://www.pexels.com): Pexels provides high quality and completely free stock photos licensed under the
+Creative Commons Zero (CC0) license.
 
 # Watch the Video
 
@@ -221,15 +226,20 @@ There is a large amount of user uploaded images in a long running web app
 * [D3.js](https://d3js.org): D3.js is a JavaScript library for manipulating documents based on data.
 * [d3-cloud](https://github.com/jasondavies/d3-cloud): A Wordle-inspired word cloud layout written in JavaScript.
 * [Featherlight](https://noelboss.github.io/featherlight/): Featherlight is a very lightweight jQuery lightbox plugin.
-* [Glyphicons](http://glyphicons.com): GLYPHICONS is a library of precisely prepared monochromatic icons and symbols, created with an emphasis to simplicity and easy orientation.
-* [Image Picker](http://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select element into a more user friendly graphical interface.
+* [Glyphicons](http://glyphicons.com): GLYPHICONS is a library of precisely prepared monochromatic icons and symbols,
+created with an emphasis to simplicity and easy orientation.
+* [Image Picker](http://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select
+element into a more user friendly graphical interface.
 
 # Learn More
 
-* **Data Analytics Code Patterns**: Enjoyed this Code Pattern? Check out our other [Data Analytics Code Patterns](https://developer.ibm.com/code/technologies/data-science/)
-* **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
+* **Data Analytics Code Patterns**: Enjoyed this Code Pattern? Check out our other
+[Data Analytics Code Patterns](https://developer.ibm.com/code/technologies/data-science/)
+* **AI and Data Code Pattern Playlist**: Bookmark our
+[playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
 * **Watson Studio**: Master the art of data science with IBM's [Watson Studio](https://dataplatform.ibm.com/)
-* **Spark on IBM Cloud**: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our [Spark service](https://console.bluemix.net/catalog/services/apache-spark)
+* **Spark on IBM Cloud**: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our
+[Spark service](https://console.bluemix.net/catalog/services/apache-spark)
 
 # License
 [Apache 2.0](LICENSE)
