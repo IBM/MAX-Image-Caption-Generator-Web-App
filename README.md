@@ -58,7 +58,7 @@ Creative Commons Zero (CC0) license.
 <!-- TODO: embed link to youtube video -->
 
 # Steps
-
+<!--
 Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 
 ## Deploy to IBM Cloud
@@ -79,7 +79,7 @@ Generator endpoint is provided and a new one is not created on your IBM Cloud ac
 ## Run Locally
 
 > NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
-
+-->
 #### Setting up the MAX Model
 
 1. [Build the Model](#1-build-the-model)
