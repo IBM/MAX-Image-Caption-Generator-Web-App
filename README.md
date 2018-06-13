@@ -233,13 +233,13 @@ element into a more user friendly graphical interface.
 
 # Learn More
 
-* **Data Analytics Code Patterns**: Enjoyed this Code Pattern? Check out our other
-[Data Analytics Code Patterns](https://developer.ibm.com/code/technologies/data-science/)
+* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other
+[Artificial Intelligence Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/)
 * **AI and Data Code Pattern Playlist**: Bookmark our
 [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
 * **Watson Studio**: Master the art of data science with IBM's [Watson Studio](https://dataplatform.ibm.com/)
-* **Spark on IBM Cloud**: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our
-[Spark service](https://console.bluemix.net/catalog/services/apache-spark)
+* **Deep Learning with Watson Studio**: Design and deploy deep learning models using neural networks, easily scale to
+hundreds of training runs. Learn more at [Deep Learning with Watson Studio](https://www.ibm.com/cloud/deep-learning).
 
 # License
 [Apache 2.0](LICENSE)
