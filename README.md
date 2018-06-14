@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
 
-# Use a deep learning model to filter images in a web application
+# Create a web app to interact with machine learning generated image captions
 
 Every day 2.5 quintillion bytes of data are created, based on an
 [IBM study](https://public.dhe.ibm.com/common/ssi/ecm/wr/en/wrl12345usen/watson-customer-engagement-watson-marketing-wr-other-papers-and-reports-wrl12345usen-20170719.pdf).
