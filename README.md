@@ -158,13 +158,25 @@ You can also test it on the command line, for example:
 
 ### Starting the Web App
 
-#### 1. Installing dependencies
+#### 1. Check out the code
+
+Clone the Image Caption Generator Web App repository locally by running the following command:
+
+    git clone https://github.com/IBM/MAX-Image-Caption-Generator-Web-App.git
+
+> Note: You may need to `cd ..` out of the MAX-Image-Caption-Generator directory first
+
+Then change directory into the local repository
+
+    cd MAX-Image-Caption-Generator-Web-App
+
+#### 2. Installing dependencies
 
 Before running this web app you must install its dependencies:
 
     pip install -r requirements.txt
 
-#### 2. Running the server
+#### 3. Running the server
 
 You then start the web app by running:
 
@@ -175,14 +187,14 @@ Once it's finished processing the default images (< 1 minute) you can then acces
 
 The Image Caption Generator endpoint must be available at `http://localhost:5000` for the web app to successfully start.
 
-#### 3. Configuring ports (Optional)
+#### 4. Configuring ports (Optional)
 
 If you want to use a different port or are running the ML endpoint at a different location
 you can change them with command-line options:
 
     python app.py --port=[new port] --ml-endpoint=[endpoint url including protocol and port]
 
-#### 4. Instructions for Docker (Optional)
+#### 5. Instructions for Docker (Optional)
 
 To run the web app with Docker the containers running the webserver and the REST endpoint need to share the same
 network stack. This is done in the following steps:
