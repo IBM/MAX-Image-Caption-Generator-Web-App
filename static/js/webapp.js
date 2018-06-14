@@ -206,7 +206,7 @@ $(function() {
     select_all(true);
 
     // Image upload form submit functionality
-    $('#img-upload').on('submit', function(data){
+    $('#img-upload').on('submit', function(event){
         // Stop form from submitting normally
         event.preventDefault();
 
