@@ -160,7 +160,7 @@ You can also test it on the command line, for example:
 
 #### 1. Check out the code
 
-Clone the Image Caption Generator Web App repository locally then run the following command:
+Clone the Image Caption Generator Web App repository locally by running the following command:
 
     git clone https://github.com/IBM/MAX-Image-Caption-Generator-Web-App.git
 
