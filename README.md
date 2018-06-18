@@ -55,7 +55,9 @@ Creative Commons Zero (CC0) license.
 
 # Watch the Video
 
-<!-- TODO: embed link to youtube video -->
+The following is a talk at Spark+AI Summit 2018 about MAX that includes a short demo of the web app.
+
+[![Watch the Video](https://i.vimeocdn.com/video/707093466.jpg)](https://vimeo.com/274936527)
 
 # Steps
 <!--
