@@ -60,28 +60,37 @@ The following is a talk at Spark+AI Summit 2018 about MAX that includes a short 
 [![Watch the Video](https://i.vimeocdn.com/video/707093466.jpg)](https://vimeo.com/274936527)
 
 # Steps
-<!--
-Use the ``Deploy to IBM Cloud`` button **OR** run locally.
+
+Deploy to IBM Cloud **OR** run locally.
 
 ## Deploy to IBM Cloud
 
-[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/MAX-Image-Caption-Generator-Web-App)
+### Deploy the Model
 
-1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``. If you do not have an IBM Cloud account
-yet, you will need to create one.
+Follow the [Deploy the Model Doc]() to deploy the model to IBM Cloud.
+If you already have a model API endpoint running you can skip this step.
 
-2. In Toolchains, click on ``Delivery Pipeline`` to watch while the app is deployed. Once deployed, the app can be
+### Deploy the Web App
+
+1. Press the ``Deploy to IBM Cloud`` button. If you do not have an IBM Cloud account yet, you will need to create one.
+
+    [![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/MAX-Image-Caption-Generator-Web-App)
+
+2. Fill in the form with Image Caption Generator API endpoint deployed above and then click on ``Deploy``.
+
+    > e.g. `https://max-image-caption-generator.mybluemix.net/model/predict`
+
+    ![Create App](doc/source/images/ibm-cloud-form.png)
+
+3. In Toolchains, click on ``Delivery Pipeline`` to watch while the app is deployed. Once deployed, the app can be
 viewed by clicking ``View app``.
 
-![Deploy to IBM Cloud](doc/source/images/ibm-cloud-deploy.png)
-
-> Note: When deploying to IBM Cloud, by clicking the ``Deploy to IBM Cloud`` button above, a public Image Caption
-Generator endpoint is provided and a new one is not created on your IBM Cloud account.
+    ![Delivery Pipeline](doc/source/images/ibm-cloud-deploy.png)
 
 ## Run Locally
 
 > NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
--->
+
 #### Setting up the MAX Model
 
 1. [Build the Model](#1-build-the-model)

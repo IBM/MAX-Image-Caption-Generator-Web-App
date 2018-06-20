@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Deploy Image Caption Generator Web App",
+    "description": "",
+    "longDescription": "The Delivery Pipeline automates the deployment of the Image Caption Generator Web App",
+    "type": "object",
+    "properties": {
+        "dev-region": {
+            "description": "The IBM Cloud region",
+            "type": "string"
+        },
+        "dev-organization": {
+            "description": "The IBM Cloud org",
+            "type": "string"
+        },
+        "dev-space": {
+            "description": "The IBM Cloud space",
+            "type": "string"
+        },
+        "dev-app-name": {
+            "description": "MAX-Image-Caption-Generator-Web-App",
+            "type": "string",
+            "pattern": "\\S"
+        },
+        "dev-ml-endpoint": {
+            "description": "e.g. https://max-image-caption-generator.mybluemix.net/model/predict",
+            "type": "string"
+        }
+    },
+    "required": [
+        "dev-region",
+        "dev-organization",
+        "dev-space",
+        "app-name",
+        "dev-ml-endpoint"
+    ],
+    "form": [
+        {
+            "type": "validator",
+            "url": "/devops/setup/bm-helper/helper.html"
+        },
+        {
+            "type": "text",
+            "readonly": false,
+            "title": "App Name",
+            "key": "app-name"
+        },
+        {
+            "type": "table",
+            "columnCount": 3,
+            "widths": [
+                "33%",
+                "33%",
+                "33%"
+            ],
+            "items": [
+                {
+                    "type": "label",
+                    "title": "Region"
+                },
+                {
+                    "type": "label",
+                    "title": "Organization"
+                },
+                {
+                    "type": "label",
+                    "title": "Space"
+                },
+                {
+                    "type": "select",
+                    "key": "dev-region"
+                },
+                {
+                    "type": "select",
+                    "key": "dev-organization"
+                },
+                {
+                    "type": "select",
+                    "key": "dev-space",
+                    "readonly": false
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "readonly": false,
+            "title": "Image Caption Generator Model API Endpoint",
+            "description": "e.g. https://max-image-caption-generator.mybluemix.net/model/predict",
+            "key": "dev-ml-endpoint"
+        }
+    ]
+}
