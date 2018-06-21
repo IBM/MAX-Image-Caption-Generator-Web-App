@@ -27,8 +27,8 @@
 
 5. In the sidebar, scroll down to `Services` under `Discovery and Load Balancing`. Click on the service that was created in the previous step. Under the `Internal endpoints`, make note of the port number that is within the range 30000 to 32676. This port is the `NodePort`.
 
-  ![Node Port](doc/source/images/node-port.png)
+   ![Node Port](doc/source/images/node-port.png)
 
 6. The MAX model should be accessible at `<Public IP>:<NodePort>`.
 
-  ![Model Service Page](doc/source/deployed-model.png)
+   ![Model Service Page](doc/source/images/deployed-model.png)
