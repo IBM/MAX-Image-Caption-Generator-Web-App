@@ -26,6 +26,10 @@ import time
 import threading
 from tornado import httpserver, ioloop, web
 from tornado.options import define, options, parse_command_line
+try:
+    import Queue as queue
+except ImportError:
+    import queue
 
 # Command Line Options
 define("port", default=8088, help="Port the web app will run on")
@@ -72,6 +76,9 @@ class CleanupHandler(web.RequestHandler):
 class UploadHandler(web.RequestHandler):
     def post(self):
         finish_ret = []
+        threads = []
+        ret_queue = queue.Queue()
+
         new_files = self.request.files['file']
         for file_des in new_files:
             file_name = temp_img_prefix + file_des['filename']
@@ -80,16 +87,31 @@ class UploadHandler(web.RequestHandler):
                 output_file = open(rel_path, 'wb')
                 output_file.write(file_des['body'])
                 output_file.close()
-                caption = run_ml(rel_path)
-                finish_ret.append({
-                    "file_name": rel_path,
-                    "caption": caption[0]['caption']
-                })
+                t = threading.Thread(target=run_ml_queued,
+                                     args=(rel_path, ret_queue))
+                threads.append(t)
+                t.start()
+
+        for t in threads:
+            t.join()
+
+        sorted_ret = sorted(list(ret_queue.queue), key=lambda t: t[0].lower())
+        for rel_path, caption in sorted_ret:
+            finish_ret.append({
+                "file_name": rel_path,
+                "caption": caption[0]['caption']
+            })
+
         if not finish_ret:
             self.send_error(400)
             return
         sort_image_captions()
         self.finish(json.dumps(finish_ret))
+
+
+def run_ml_queued(img_path, ret_queue):
+    caption = run_ml(img_path)
+    ret_queue.put((img_path, caption))
 
 
 def valid_file_ext(filename):
@@ -127,8 +149,6 @@ def prepare_metadata():
     for img in rel_img_list:
         t = threading.Thread(target=run_ml, args=(img,))
         threads.append(t)
-
-    for t in threads:
         t.start()
 
     for t in threads:
