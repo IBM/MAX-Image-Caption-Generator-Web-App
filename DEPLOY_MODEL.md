@@ -2,15 +2,15 @@
 
 1. Create a cluster using the [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/clusters
 ). For this Code Pattern we will only need to use the Free tier which gives us access to a Kubernetes cluster with 1 worker node.
-  > Note: This could take anywhere from 10 minutes to half an hour.
+   > Note: This could take anywhere from 10 minutes to half an hour.
 
-  ![Create Cluster](doc/source/images/create-cluster.png)
+   ![Create Cluster](doc/source/images/create-cluster.png)
 
 2. (Optional Step) The instructions to install the command line tools are optional and not required to deploy the model using this tutorial. You may choose to install them while waiting for the cluster to be created, if you wish to do so.
 
 3. On your cluster dashboard, select `Worker Nodes` in the sidebar and take note of the `Public IP Address` for the node.
 
-  ![Worker IP](doc/source/images/worker-public-ip.png)
+   ![Worker IP](doc/source/images/worker-public-ip.png)
 
 4. Click the `Kubernetes Dashboard` button to open the dashboard. Hit the `+ Create` button in the top right corner. Go to `Create an app`.
    Fill in the following fields:
