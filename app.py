@@ -180,7 +180,7 @@ def main():
     global ml_endpoint
     ml_endpoint = options.ml_endpoint
     if '/model/predict' not in options.ml_endpoint:
-        ml_endpoint = options.ml_endpoint + "/model/predict"
+        ml_endpoint = options.ml_endpoint.rstrip('/') + "/model/predict"
 
     logging.info("Connecting to ML endpoint at %s", ml_endpoint)
 

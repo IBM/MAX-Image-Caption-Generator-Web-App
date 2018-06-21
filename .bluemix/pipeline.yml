@@ -1,0 +1,37 @@
+---
+stages:
+- name: Build Stage
+  inputs:
+  - type: git
+    branch: ${BRANCH}
+    service: ${REPO}
+  jobs:
+  - name: Build
+    type: builder
+    artifact_dir: ''
+- name: Deploy Stage
+  inputs:
+  - type: job
+    stage: Build Stage
+    job: Build
+  triggers:
+  - type: stage
+  properties:
+  - name: ML_ENDPOINT
+    value: ${ML_ENDPOINT}
+    type: text
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${CF_REGION_ID}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+      application: ${CF_APP}
+    script: |-
+      #!/bin/bash
+      cf push "${CF_APP}" --no-start
+      cf set-env "${CF_APP}" ML_ENDPOINT "${ML_ENDPOINT}"
+      cf start "${CF_APP}"
+      # View logs
+      # cf logs "${CF_APP}" --recent
