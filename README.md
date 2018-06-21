@@ -67,8 +67,10 @@ Deploy to IBM Cloud **OR** run locally.
 
 ### Deploy the Model
 
-Follow the [Deploy the Model Doc]() to deploy the model to IBM Cloud.
-If you already have a model API endpoint running you can skip this step.
+Follow the [Deploy the Model Doc](DEPLOY_MODEL.md) to deploy the Image Caption Generator model to IBM Cloud.
+If you already have a model API endpoint available you can skip this process.
+
+> Note: Deploying the model can take time, to get going faster you can try [running locally](#run-locally).
 
 ### Deploy the Web App
 
@@ -76,7 +78,8 @@ If you already have a model API endpoint running you can skip this step.
 
     [![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/MAX-Image-Caption-Generator-Web-App)
 
-2. Fill in the form with Image Caption Generator API endpoint deployed above and then click on ``Deploy``.
+2. Click `Delivery Pipeline` and fill in the form with Image Caption Generator API endpoint deployed above then
+click on ``Create``.
 
     > e.g. `https://max-image-caption-generator.mybluemix.net/model/predict`
 
@@ -99,10 +102,11 @@ viewed by clicking ``View app``.
 
 #### Starting the Web App
 
-1. [Installing dependencies](#1-installing-dependencies)
-2. [Running the server](#2-running-the-server)
-3. [Configuring ports (Optional)](#3-configuring-ports-optional)
-4. [Instructions for Docker (Optional)](#4-instructions-for-docker-optional)
+1. [Check out the code](#1-check-out-the-code)
+2. [Installing dependencies](#2-installing-dependencies)
+3. [Running the server](#3-running-the-server)
+4. [Configuring ports (Optional)](#4-configuring-ports-optional)
+5. [Instructions for Docker (Optional)](#5-instructions-for-docker-optional)
 
 ### Setting up the MAX Model
 
