@@ -23,7 +23,7 @@
             "pattern": "\\S"
         },
         "dev-ml-endpoint": {
-            "description": "e.g. https://max-image-caption-generator.mybluemix.net/model/predict",
+            "description": "e.g. http://170.0.0.1:5000",
             "type": "string"
         }
     },
@@ -85,7 +85,7 @@
             "type": "text",
             "readonly": false,
             "title": "Image Caption Generator Model API Endpoint",
-            "description": "e.g. https://max-image-caption-generator.mybluemix.net/model/predict",
+            "description": "e.g. http://170.0.0.1:5000",
             "key": "dev-ml-endpoint"
         }
     ]

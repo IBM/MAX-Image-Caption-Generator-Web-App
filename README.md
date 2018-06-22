@@ -74,25 +74,24 @@ If you already have a model API endpoint available you can skip this process.
 
 ### Deploy the Web App
 
-1. Press the ``Deploy to IBM Cloud`` button. If you do not have an IBM Cloud account yet, you will need to create one.
+1. Press the `Deploy to IBM Cloud` button. If you do not have an IBM Cloud account yet, you will need to create one.
 
     [![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/MAX-Image-Caption-Generator-Web-App)
 
-2. Click `Delivery Pipeline` and fill in the form with Image Caption Generator API endpoint deployed above then
-click on ``Create``.
+2. Click `Delivery Pipeline` and fill in the form with the Image Caption Generator API endpoint deployed above, then click on `Create`.
 
-    > e.g. `https://max-image-caption-generator.mybluemix.net/model/predict`
+    > The format for this entry should be `http://170.0.0.1:5000`
 
     ![Create App](doc/source/images/ibm-cloud-form.png)
 
-3. In Toolchains, click on ``Delivery Pipeline`` to watch while the app is deployed. Once deployed, the app can be
-viewed by clicking ``View app``.
+3. In Toolchains, click on `Delivery Pipeline` to watch while the app is deployed. Once deployed, the app can be
+viewed by clicking `View app`.
 
     ![Delivery Pipeline](doc/source/images/ibm-cloud-deploy.png)
 
 ## Run Locally
 
-> NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
+> NOTE: These steps are only needed when running locally instead of using the `Deploy to IBM Cloud` button.
 
 #### Setting up the MAX Model
 
