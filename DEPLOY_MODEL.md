@@ -6,9 +6,11 @@
 
    ![Create Cluster](doc/source/images/create-cluster.png)
 
-2. (Optional Step) The instructions to install the command line tools are optional and not required to deploy the model using this tutorial. You may choose to install them while waiting for the cluster to be created, if you wish to do so.
+2. (Optional Step) The instructions to install the command line tools are optional and not required to deploy the model using this tutorial. While not required, you may choose to install them while waiting for the cluster to be created.
 
 3. On your cluster dashboard, select `Worker Nodes` in the sidebar and take note of the `Public IP Address` for the node.
+
+> Note: The IP address will not be displayed until the cluster is fully deployed.
 
    ![Worker IP](doc/source/images/worker-public-ip.png)
 
@@ -20,6 +22,7 @@
     Number of pods: 1
     Service: External
     Port: 5000 | Target Port: 5000
+    Protocol: TCP
    ```
    Then click `Deploy`
 
