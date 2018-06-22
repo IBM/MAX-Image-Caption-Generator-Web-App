@@ -80,7 +80,7 @@ If you already have a model API endpoint available you can skip this process.
 
 2. Click `Delivery Pipeline` and fill in the form with the Image Caption Generator API endpoint deployed above, then click on `Create`.
 
-    > The format for this entry should be `<Public IP>:<NodePort>`
+    > The format for this entry should look like `https://170.0.0.1:5000`
 
     ![Create App](doc/source/images/ibm-cloud-form.png)
 
