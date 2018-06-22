@@ -21,8 +21,7 @@
     Container image: codait/max-image-caption-generator:latest
     Number of pods: 1
     Service: External
-    Port: 5000 | Target Port: 5000
-    Protocol: TCP
+    Port: 5000 | Target Port: 5000 | Protocol: TCP
    ```
    Then click `Deploy`
 
