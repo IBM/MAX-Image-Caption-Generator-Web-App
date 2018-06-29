@@ -61,7 +61,9 @@ The following is a talk at Spark+AI Summit 2018 about MAX that includes a short 
 
 # Steps
 
-Deploy to IBM Cloud **OR** run locally.
+- [Deploy to IBM Cloud](#deploy-to-ibm-cloud)
+- [Run Locally](#run-locally)
+- [Deploy on Kubernetes](#deploy-on-kubernetes)
 
 ## Deploy to IBM Cloud
 
@@ -210,7 +212,7 @@ you can change them with command-line options:
 
 #### 5. Instructions for Docker (Optional)
 
-To run the web app with Docker the containers running the webserver and the REST endpoint need to share the same
+To run the web app with Docker the containers running the web server and the REST endpoint need to share the same
 network stack. This is done in the following steps:
 
 Modify the command that runs the Image Caption Generator REST endpoint to map an additional port in the container to a
@@ -225,6 +227,22 @@ Build the web app image by running:
 Run the web app container using:
 
     docker run --net='container:max-im2txt' -it webapp
+
+## Deploy on Kubernetes
+
+You can also deploy the model and web app on Kubernetes using the latest docker images on Docker Hub.
+
+On your Kubernetes cluster, clone the model and web app git repositories.
+
+Then in the model directory run:
+
+    kubectl apply -f image-caption-generator.yaml
+
+And in the web app directory run:
+
+    kubectl apply -f image-caption-generator-web-app.yaml
+
+The web app will be accessible at port `8088` of your cluster and the model API at port `5000`.
 
 # Sample Output
 
