@@ -61,6 +61,8 @@ The following is a talk at Spark+AI Summit 2018 about MAX that includes a short 
 
 # Steps
 
+Ways to run the code pattern:
+
 - [Deploy to IBM Cloud](#deploy-to-ibm-cloud)
 - [Run Locally](#run-locally)
 - [Deploy on Kubernetes](#deploy-on-kubernetes)
