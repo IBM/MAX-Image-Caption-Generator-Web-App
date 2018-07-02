@@ -64,8 +64,8 @@ The following is a talk at Spark+AI Summit 2018 about MAX that includes a short 
 Ways to run the code pattern:
 
 - [Deploy to IBM Cloud](#deploy-to-ibm-cloud)
-- [Run Locally](#run-locally)
 - [Deploy on Kubernetes](#deploy-on-kubernetes)
+- [Run Locally](#run-locally)
 
 ## Deploy to IBM Cloud
 
@@ -92,6 +92,17 @@ If you already have a model API endpoint available you can skip this process.
 viewed by clicking `View app`.
 
     ![Delivery Pipeline](doc/source/images/ibm-cloud-deploy.png)
+
+## Deploy on Kubernetes
+
+You can also deploy the model and web app on Kubernetes using the latest docker images on Docker Hub.
+
+On your Kubernetes cluster, run the following commands:
+
+    kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator/master/image-caption-generator.yaml
+    kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator-Web-App/master/image-caption-generator-web-app.yaml
+
+The model will be accessible at port `5000` and the web app at port `8088` of your cluster.
 
 ## Run Locally
 
@@ -229,22 +240,6 @@ Build the web app image by running:
 Run the web app container using:
 
     docker run --net='container:max-im2txt' -it webapp
-
-## Deploy on Kubernetes
-
-You can also deploy the model and web app on Kubernetes using the latest docker images on Docker Hub.
-
-On your Kubernetes cluster, clone the model and web app git repositories.
-
-Then in the model directory run:
-
-    kubectl apply -f image-caption-generator.yaml
-
-And in the web app directory run:
-
-    kubectl apply -f image-caption-generator-web-app.yaml
-
-The web app will be accessible at port `8088` of your cluster and the model API at port `5000`.
 
 # Sample Output
 
