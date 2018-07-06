@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: image-caption-generator-web-app
-        image: codait/image-caption-generator-web-app:latest
+        image: codait/max-image-caption-generator-web-app:latest
         command: ["python", "app.py", "--ml-endpoint=http://image-caption-generator:5000"]
         ports:
         - containerPort: 8088
