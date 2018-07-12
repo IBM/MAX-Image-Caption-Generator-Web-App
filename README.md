@@ -26,7 +26,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * Generate captions for an image using the MAX Model's REST API
 * Run a web application that using the model's REST API
 
-![Architecture](doc/source/images/architecture.jpg)
+![Architecture](doc/source/images/architecture.png)
 
 ## Flow
 
