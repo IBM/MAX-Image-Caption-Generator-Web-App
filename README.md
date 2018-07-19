@@ -218,7 +218,7 @@ network stack. This is done in the following steps:
 Modify the command that runs the Image Caption Generator REST endpoint to map an additional port in the container to a
 port on the host machine. In the example below it is mapped to port `8088` on the host but other ports can also be used.
 
-    docker run -it -p 5000:5000 -p 8088:8088 --name max-im2txt codait/max-image-caption-generator
+    docker run -it -p 5000:5000 -p 8088:8088 --name image-caption-generator codait/max-image-caption-generator
 
 Build the web app image by running:
 
@@ -226,13 +226,13 @@ Build the web app image by running:
 
 Run the web app container using:
 
-    docker run --net='container:max-im2txt' -it webapp
+    docker run --net='container:image-caption-generator' -it webapp
 
 ##### Using the Docker Hub Image
 
 You can also deploy the web app with the latest docker image available on DockerHub by running:
 
-    docker run --net='container:max-im2txt' -it codait/max-image-caption-generator-web-app
+    docker run --net='container:image-caption-generator' -it codait/max-image-caption-generator-web-app
 
 This will use the model docker container run above and can be run without cloning the web app repo locally.
 
