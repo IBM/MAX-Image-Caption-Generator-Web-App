@@ -149,6 +149,9 @@ You can also test it on the command line, for example:
 
     curl -F "image=@path/to/image.jpg" -X POST http://localhost:5000/model/predict
 
+The [model assets folder](https://github.com/IBM/MAX-Image-Caption-Generator/tree/master/assets)
+contains a few images you can use to test out the API, or you can use your own.
+
 ```json
 {
   "status": "ok",
