@@ -133,8 +133,9 @@ To run the docker image, which automatically starts the model serving API, run:
 
     docker run -it -p 5000:5000 codait/max-image-caption-generator
 
-This will pull the latest docker image available on Docker Hub to run. If you'd rather build the model locally you can
-follow the steps in the model [README](https://github.com/IBM/MAX-Image-Caption-Generator/blob/master/README.md#steps).
+This will pull a pre-built image from Docker Hub (or use an existing image if already cached locally) and run it.
+If you'd rather build the model locally you can follow the steps in the
+[model README](https://github.com/IBM/MAX-Image-Caption-Generator/blob/master/README.md#steps).
 
 _Note_ that currently this docker image is CPU only (we will add support for GPU images later).
 
