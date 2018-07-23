@@ -146,12 +146,12 @@ Go to `http://localhost:5000` to load it. From there you can explore the API and
 
 Use the `model/predict` endpoint to load a test file and get captions for the image from the API.
 
+The [model assets folder](https://github.com/IBM/MAX-Image-Caption-Generator/tree/master/assets)
+contains a few images you can use to test out the API, or you can use your own.
+
 You can also test it on the command line, for example:
 
     curl -F "image=@path/to/image.jpg" -X POST http://localhost:5000/model/predict
-
-The [model assets folder](https://github.com/IBM/MAX-Image-Caption-Generator/tree/master/assets)
-contains a few images you can use to test out the API, or you can use your own.
 
 ```json
 {
@@ -226,11 +226,11 @@ port on the host machine. In the example below it is mapped to port `8088` on th
 
 Build the web app image by running:
 
-    docker build -t webapp .
+    docker build -t web-app .
 
 Run the web app container using:
 
-    docker run --net='container:max-image-caption-generator' -it webapp
+    docker run --net='container:max-image-caption-generator' -it web-app
 
 ##### Using the Docker Hub Image
 
