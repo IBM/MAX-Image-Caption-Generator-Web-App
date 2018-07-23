@@ -226,11 +226,11 @@ port on the host machine. In the example below it is mapped to port `8088` on th
 
 Build the web app image by running:
 
-    docker build -t web-app .
+    docker build -t max-image-caption-generator-web-app .
 
 Run the web app container using:
 
-    docker run --net='container:max-image-caption-generator' -it web-app
+    docker run --net='container:max-image-caption-generator' -it max-image-caption-generator-web-app
 
 ##### Using the Docker Hub Image
 
