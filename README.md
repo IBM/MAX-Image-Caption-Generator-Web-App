@@ -110,9 +110,8 @@ The web app will be available at port `8088` of your cluster and the model API a
 
 #### Setting up the MAX Model
 
-1. [Build the Model](#1-build-the-model)
-2. [Deploy the Model](#2-deploy-the-model)
-3. [Experimenting with the API (Optional)](#3-experimenting-with-the-api-optional)
+1. [Deploy the Model](#1-deploy-the-model)
+2. [Experimenting with the API (Optional)](#2-experimenting-with-the-api-optional)
 
 #### Starting the Web App
 
@@ -127,40 +126,31 @@ The web app will be available at port `8088` of your cluster and the model API a
 > NOTE: The set of instructions in this section are a modified version of the one found on the
 [Image Caption Generator Project Page](https://github.com/IBM/MAX-Image-Caption-Generator)
 
-#### 1. Build the Model
-
-Clone the Image Caption Generator model locally. In a terminal, run the following command:
-
-    git clone https://github.com/IBM/MAX-Image-Caption-Generator.git
-
-Change directory into the repository base folder:
-
-    cd MAX-Image-Caption-Generator
-
-To build the docker image locally, run:
-
-    docker build -t max-im2txt .
-
-All required model assets will be downloaded during the build process.
-
-_Note_ that currently this docker image is CPU only (we will add support for GPU images later).
-
-#### 2. Deploy the Model
+#### 1. Deploy the Model
 
 To run the docker image, which automatically starts the model serving API, run:
 
-    docker run -it -p 5000:5000 max-im2txt
+    docker run -it -p 5000:5000 codait/max-image-caption-generator
 
-#### 3. Experimenting with the API (Optional)
+This will pull a pre-built image from Docker Hub (or use an existing image if already cached locally) and run it.
+If you'd rather build the model locally you can follow the steps in the
+[model README](https://github.com/IBM/MAX-Image-Caption-Generator/blob/master/README.md#steps).
+
+_Note_ that currently this docker image is CPU only (we will add support for GPU images later).
+
+#### 2. Experimenting with the API (Optional)
 
 The API server automatically generates an interactive Swagger documentation page.
 Go to `http://localhost:5000` to load it. From there you can explore the API and also create test requests.
 
 Use the `model/predict` endpoint to load a test file and get captions for the image from the API.
 
+The [model assets folder](https://github.com/IBM/MAX-Image-Caption-Generator/tree/master/assets)
+contains a few images you can use to test out the API, or you can use your own.
+
 You can also test it on the command line, for example:
 
-    curl -F "image=@assets/surfing.jpg" -X POST http://localhost:5000/model/predict
+    curl -F "image=@path/to/image.jpg" -X POST http://localhost:5000/model/predict
 
 ```json
 {
@@ -231,15 +221,23 @@ network stack. This is done in the following steps:
 Modify the command that runs the Image Caption Generator REST endpoint to map an additional port in the container to a
 port on the host machine. In the example below it is mapped to port `8088` on the host but other ports can also be used.
 
-    docker run -it -p 5000:5000 -p 8088:8088 --name max-im2txt max-im2txt
+    docker run -it -p 5000:5000 -p 8088:8088 --name max-image-caption-generator codait/max-image-caption-generator
 
 Build the web app image by running:
 
-    docker build -t webapp .
+    docker build -t max-image-caption-generator-web-app .
 
 Run the web app container using:
 
-    docker run --net='container:max-im2txt' -it webapp
+    docker run --net='container:max-image-caption-generator' -it max-image-caption-generator-web-app
+
+##### Using the Docker Hub Image
+
+You can also deploy the web app with the latest docker image available on DockerHub by running:
+
+    docker run --net='container:max-image-caption-generator' -it codait/max-image-caption-generator-web-app
+
+This will use the model docker container run above and can be run without cloning the web app repo locally.
 
 # Sample Output
 
