@@ -102,7 +102,11 @@ On your Kubernetes cluster, run the following commands:
     kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator/master/max-image-caption-generator.yaml
     kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator-Web-App/master/max-image-caption-generator-web-app.yaml
 
-The web app will be available at port `8088` of your cluster and the model API at port `5000`.
+The web app will be available at port `8088` of your cluster.
+The model will only be available internally, but can be accessed externally through the `NodePort`.
+
+> Note: For deploying the web app on IBM Cloud it is recommended to follow the
+[Deploy to IBM Cloud](#deploy-to-ibm-cloud) instructions above rather than deploying with IBM Cloud Kubernetes Service.
 
 ## Run Locally
 
