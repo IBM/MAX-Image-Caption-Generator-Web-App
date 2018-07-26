@@ -82,13 +82,18 @@ If you already have a model API endpoint available you can skip this process.
 
     [![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/MAX-Image-Caption-Generator-Web-App)
 
-2. Click `Delivery Pipeline` and fill in the form with the Image Caption Generator API endpoint deployed above, then click on `Create`.
+2. Click `Delivery Pipeline` and click the `Create +` button in the form to generate a `IBM Cloud API Key` for the web app.
+
+    ![Create API Key](doc/source/images/ibm-cloud-api-key.png)
+
+3. Once the API key is generated, the `Region`, `Organization`, and `Space` form sections will populate. Fill in the
+`Image Caption Generator Model API Endpoint` section with the endpoint deployed above, then click on `Create`.
 
     > The format for this entry should be `http://170.0.0.1:5000`
 
     ![Create App](doc/source/images/ibm-cloud-form.png)
 
-3. In Toolchains, click on `Delivery Pipeline` to watch while the app is deployed. Once deployed, the app can be
+4. In Toolchains, click on `Delivery Pipeline` to watch while the app is deployed. Once deployed, the app can be
 viewed by clicking `View app`.
 
     ![Delivery Pipeline](doc/source/images/ibm-cloud-deploy.png)
