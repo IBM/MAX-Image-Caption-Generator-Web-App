@@ -231,7 +231,7 @@ $(function() {
                     set_img_picker();
                 },
                 error: function() {
-                    alert("Must submit a valid file (png, jpeg, jpg, or gif)");
+                    alert("Must submit a valid file (png, jpeg, or jpg)");
                 },
                 complete: function() {
                     $("#file-submit").text("Submit");

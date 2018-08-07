@@ -44,7 +44,7 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"),
 static_img_path = "static/img/images/"
 temp_img_prefix = "MAX-"
 image_captions = collections.OrderedDict()
-VALID_EXT = ['png', 'jpg', 'jpeg', 'gif']
+VALID_EXT = ['png', 'jpg', 'jpeg']
 
 
 class MainHandler(web.RequestHandler):
