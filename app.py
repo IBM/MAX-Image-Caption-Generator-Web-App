@@ -19,6 +19,7 @@
 import collections
 import json
 import logging
+import mimetypes
 import os
 import requests
 import signal
@@ -120,7 +121,8 @@ def valid_file_ext(filename):
 
 # Runs ML on given image
 def run_ml(img_path):
-    img_file = {'image': open(img_path, 'rb')}
+    mime_type = mimetypes.guess_type(img_path)[0]
+    img_file = {'image': (img_path, open(img_path, 'rb'), mime_type)}
     r = requests.post(url=ml_endpoint, files=img_file)
     cap_json = r.json()
     caption = cap_json['predictions']
