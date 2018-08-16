@@ -19,6 +19,7 @@
 import collections
 import json
 import logging
+import mimetypes
 import os
 import requests
 import signal
@@ -84,9 +85,8 @@ class UploadHandler(web.RequestHandler):
             file_name = temp_img_prefix + file_des['filename']
             if valid_file_ext(file_name):
                 rel_path = static_img_path + file_name
-                output_file = open(rel_path, 'wb')
-                output_file.write(file_des['body'])
-                output_file.close()
+                with open(rel_path, 'wb') as output_file:
+                    output_file.write(file_des['body'])
                 t = threading.Thread(target=run_ml_queued,
                                      args=(rel_path, ret_queue))
                 threads.append(t)
@@ -120,8 +120,10 @@ def valid_file_ext(filename):
 
 # Runs ML on given image
 def run_ml(img_path):
-    img_file = {'image': open(img_path, 'rb')}
-    r = requests.post(url=ml_endpoint, files=img_file)
+    mime_type = mimetypes.guess_type(img_path)[0]
+    with open(img_path, 'rb') as img_file:
+        file_form = {'image': (img_path, img_file, mime_type)}
+        r = requests.post(url=ml_endpoint, files=file_form)
     cap_json = r.json()
     caption = cap_json['predictions']
     image_captions[img_path] = caption
