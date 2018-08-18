@@ -1,2 +1,12 @@
 # PyCharm
 .idea/
+
+# Pytest
+__pycache__/
+.cache
+
+# Mac
+.DS_Store
+
+# Web App
+static/img/images/MAX-*
