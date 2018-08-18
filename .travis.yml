@@ -5,7 +5,11 @@ python:
 services:
   - docker
 before_install:
-  - docker run -it -d -p 5000:5000 codait/max-image-caption-generator
+  - git clone https://github.com/IBM/MAX-Image-Caption-Generator.git
+  - cd MAX-Image-Caption-Generator
+  - docker build -t max-image-caption-generator .
+  - docker run -it -d -p 5000:5000 max-image-caption-generator
+  - cd ..
   - sleep 60
   - pip install -r requirements.txt
 install:
