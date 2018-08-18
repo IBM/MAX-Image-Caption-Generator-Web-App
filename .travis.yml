@@ -10,7 +10,9 @@ before_install:
   - pip install -r requirements.txt
 install:
   - python app.py &
-  - sleep 60
+  - sleep 90
+before_script:
+  - pip install -r requirements-test.txt
 script:
-  - flake8
-  - curl -F "file=@static/img/images/7-action-athlete-896567.jpg" -X POST http://localhost:8088/upload
+  - flake8 -v
+  - pytest tests/test.py
