@@ -8,7 +8,8 @@ before_install:
   - docker run -it -d -p 5000:5000 codait/max-image-caption-generator
   - pip install -r requirements.txt
 install:
-  - python app.py
+  - python app.py &
+  - sleep 30
 script:
   - flake8
   - curl -F "file=@static/img/images/7-action-athlete-896567.jpg" -X POST http://localhost:8088/upload
