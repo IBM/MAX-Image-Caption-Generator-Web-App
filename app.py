@@ -48,6 +48,7 @@ image_captions = collections.OrderedDict()
 VALID_EXT = ['png', 'jpg', 'jpeg']
 error_raised = []
 
+
 class MainHandler(web.RequestHandler):
     def get(self):
         self.render("index.html", image_captions=image_captions)
