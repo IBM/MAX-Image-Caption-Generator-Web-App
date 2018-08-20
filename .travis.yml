@@ -17,7 +17,7 @@ install:
   - python app.py &
   - sleep 90
 before_script:
-  - pip install -r requirements-test.txt
+  - pip install -r test-requirements.txt
 script:
   - flake8 -v
   - pytest tests/test.py

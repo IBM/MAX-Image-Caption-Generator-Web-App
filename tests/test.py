@@ -1,7 +1,7 @@
-import pytest
-import pycurl
 import io
 import json
+import pycurl
+import pytest
 
 
 def test_upload():
