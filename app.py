@@ -46,6 +46,7 @@ static_img_path = "static/img/images/"
 temp_img_prefix = "MAX-"
 image_captions = collections.OrderedDict()
 VALID_EXT = ['png', 'jpg', 'jpeg']
+error_raised = []
 
 
 class MainHandler(web.RequestHandler):
@@ -76,6 +77,15 @@ class CleanupHandler(web.RequestHandler):
 
 class UploadHandler(web.RequestHandler):
     def post(self):
+        try:
+            requests.get(ml_endpoint)
+        except requests.exceptions.ConnectionError:
+            logging.error(
+                "Lost connection to the model REST endpoint at " +
+                options.ml_endpoint)
+            self.send_error(404)
+            return
+
         finish_ret = []
         threads = []
         ret_queue = queue.Queue()
@@ -124,6 +134,11 @@ def run_ml(img_path):
     with open(img_path, 'rb') as img_file:
         file_form = {'image': (img_path, img_file, mime_type)}
         r = requests.post(url=ml_endpoint, files=file_form)
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_raised.append(e)
+        raise
     cap_json = r.json()
     caption = cap_json['predictions']
     image_captions[img_path] = caption
@@ -225,6 +240,9 @@ def main():
     start = time.time()
     prepare_metadata()
     end = time.time()
+    if error_raised:
+        logging.info("Failed to prepare metadata, stopping web server")
+        raise SystemExit
     logging.info("Metadata prepared in %s seconds", end - start)
 
     logging.info("Use Ctrl+C to stop web server")

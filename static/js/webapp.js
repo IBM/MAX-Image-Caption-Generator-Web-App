@@ -230,8 +230,12 @@ $(function() {
                     add_thumbnails(data);
                     set_img_picker();
                 },
-                error: function() {
-                    alert("Must submit a valid file (png, jpeg, or jpg)");
+                error: function(jqXHR, status, error) {
+                    if (jqXHR.status == 400) {
+                        alert("Must submit a valid file (png, jpeg, or jpg)");
+                    } else if (jqXHR.status == 404) {
+                        alert("Cannot connect to model API server");
+                    }
                 },
                 complete: function() {
                     $("#file-submit").text("Submit");
