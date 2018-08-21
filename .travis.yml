@@ -11,7 +11,7 @@ before_install:
   - docker build -t max-image-caption-generator .
   - docker run -it -d -p 5000:5000 max-image-caption-generator
   - popd
-  - sleep 60
+  - sleep 30
   - pip install -r requirements.txt
 install:
   - python app.py &
