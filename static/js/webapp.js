@@ -201,6 +201,19 @@ function select_all(bool) {
     }
 }
 
+function clean_up_imgs() {
+    if (confirm("Are you sure you wish to delete your uploaded images?")) {
+        $.ajax({
+            url: "/cleanup",
+            method: "delete",
+            success: function(data) {
+                alert("Uploaded images successfully deleted");
+                window.location.reload();
+            }
+        });
+    }
+}
+
 $(function() {
     set_img_picker();
     select_all(true);
