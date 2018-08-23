@@ -40,7 +40,8 @@ define("ml-endpoint", default="http://localhost:5000",
 
 # Setup Logging
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"),
-                    format='%(levelname)s: %(message)s')
+                    format='[%(asctime)s] %(levelname)s: %(message)s',
+                    datefmt='%m/%d/%y %H:%M:%S')
 
 # Global variables
 static_img_path = "static/img/images/"
@@ -56,14 +57,15 @@ class BaseHandler(web.RequestHandler):
         if not self.get_cookie(app_cookie):
             user_id = str(uuid.uuid4())
             self.set_cookie(app_cookie, user_id)
-            logging.info('New web app cookie set: ' + user_id)
+            logging.info('New user cookie set: ' + user_id)
         else:
-            logging.info('Previous web app cookie found: '
+            logging.info('User cookie found: '
                          + self.get_cookie(app_cookie))
 
 
 class MainHandler(BaseHandler):
     def get(self):
+        clean_up_old_images()
         self.render("index.html", image_captions=get_image_captions(self))
 
 
@@ -83,7 +85,7 @@ class DetailHandler(BaseHandler):
 
 class CleanupHandler(BaseHandler):
     def delete(self):
-        clean_up(self)
+        clean_up_user_images(self)
 
 
 class UploadHandler(BaseHandler):
@@ -205,8 +207,9 @@ def prepare_metadata():
     sort_image_captions()
 
 
-# Deletes all files uploaded through the GUI and removes them from the dict
-def clean_up(self):
+# Deletes files uploaded through the GUI and removes them from the dict
+# If 'self' is given then only the current user's images are deleted
+def clean_up_user_images(self):
     img_prefix = get_user_img_prefix(self) if self else temp_img_prefix
     img_list = get_image_list()
     for img_file in img_list:
@@ -215,13 +218,26 @@ def clean_up(self):
             image_captions.pop(img_file)
 
 
+# Deletes expired user uploaded files and removes them from the dict
+# User uploaded images expire after one day
+def clean_up_old_images():
+    img_list = get_image_list()
+    exp_time = time.time() - (24 * 60 * 60)
+    for img_file in img_list:
+        if img_file.startswith(static_img_path + temp_img_prefix)\
+                and os.stat(img_file).st_ctime < exp_time:
+            os.remove(img_file)
+            image_captions.pop(img_file)
+            logging.info("Deleted expired image: " + img_file)
+
+
 def signal_handler(sig, frame):
     ioloop.IOLoop.current().add_callback_from_signal(shutdown)
 
 
 def shutdown():
     logging.info("Cleaning up image files")
-    clean_up(None)
+    clean_up_user_images(None)
     logging.info("Stopping web server")
     server.stop()
     ioloop.IOLoop.current().stop()

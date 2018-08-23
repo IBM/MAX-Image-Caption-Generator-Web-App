@@ -42,6 +42,12 @@ body {
     font-size: 18px;
 }
 
+.info-icon {
+  font-size: 14px;
+  font-weight: bold;
+  cursor: help;
+}
+
 #word-cloud {
     text-align: center;
 }
