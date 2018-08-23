@@ -82,9 +82,6 @@ class DetailHandler(BaseHandler):
 
 
 class CleanupHandler(BaseHandler):
-    def get(self):
-        self.render("cleanup.html")
-
     def delete(self):
         clean_up(self)
 
