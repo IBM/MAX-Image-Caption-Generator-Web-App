@@ -135,7 +135,8 @@ class UploadHandler(BaseHandler):
 
 
 def get_user_img_prefix(self):
-    user_id = self.get_cookie(app_cookie) if self.get_cookie(app_cookie) else ""
+    cookie = self.get_cookie(app_cookie)
+    user_id = cookie if cookie else ""
     return temp_img_prefix + user_id + "-"
 
 
