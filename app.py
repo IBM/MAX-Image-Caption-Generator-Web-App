@@ -55,7 +55,7 @@ class BaseHandler(web.RequestHandler):
     def prepare(self):
         if not self.get_cookie(app_cookie):
             user_id = str(uuid.uuid4())
-            self.set_cookie(app_cookie, str(uuid.uuid4()))
+            self.set_cookie(app_cookie, user_id)
             logging.info('New web app cookie set: ' + user_id)
         else:
             logging.info('Previous web app cookie found: '
