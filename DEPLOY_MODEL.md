@@ -27,7 +27,7 @@
 
    ![App Deployment](doc/source/images/app-deploy.png)
 
-5. In the sidebar, scroll down to `Services` under `Discovery and Load Balancing`. Click on the service that was created in the previous step. Under the `Internal endpoints`, make note of the port number that is within the range 30000 to 32676. This port is the `NodePort`.
+5. In the sidebar, scroll down to `Services` under `Discovery and Load Balancing`. Click on the service that was created in the previous step. Under the `Internal endpoints`, make note of the port number that is within the range `30000` to `32676`. This port is the `NodePort`.
 
    ![Node Port](doc/source/images/node-port.png)
 
