@@ -47,7 +47,7 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"),
 static_img_path = "static/img/images/"
 temp_img_prefix = "MAX-"
 image_captions = collections.OrderedDict()
-VALID_EXT = ['png', 'jpg', 'jpeg']
+VALID_EXT = ['.png', '.jpg', '.jpeg']
 error_raised = []
 app_cookie = 'max-image-caption-generator-web-app'
 
@@ -158,7 +158,8 @@ def run_ml_queued(img_path, ret_queue):
 
 
 def valid_file_ext(filename):
-    return '.' in filename and filename.split('.', 1)[1].lower() in VALID_EXT
+    filename, file_extension = os.path.splitext(filename)
+    return file_extension.lower() in VALID_EXT
 
 
 # Runs ML on given image
