@@ -232,7 +232,6 @@ def clean_up_user_images(cookie=None):
             image_captions.pop(img_file)
 
 
-
 def clean_up_old_images():
     """Cleans up old user images.
 
