@@ -174,7 +174,7 @@ function set_img_picker() {
                 var img_file = $(this).children('img').attr('src');
                 $("<a href='#'/>")
                     .attr("class", "glyphicon glyphicon-resize-full more-info-icon")
-                    .attr("data-featherlight", "/detail?image=" + img_file + " .image-detail")
+                    .attr("data-featherlight", "/detail?image=" + escape(img_file) + " .image-detail")
                     .prependTo($(this));
             });
             $('a.more-info-icon').featherlight('ajax');
@@ -202,7 +202,7 @@ function select_all(bool) {
 }
 
 function clean_up_imgs() {
-    if (confirm("Are you sure you wish to delete your uploaded images?")) {
+    if (confirm("Delete all uploaded images?")) {
         $.ajax({
             url: "/cleanup",
             method: "delete",

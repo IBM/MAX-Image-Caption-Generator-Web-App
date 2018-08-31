@@ -54,6 +54,8 @@ app_cookie = 'max-image-caption-generator-web-app'
 
 class BaseHandler(web.RequestHandler):
     def prepare(self):
+        # Documentation on cookies:
+        # http://www.tornadoweb.org/en/stable/guide/security.html
         if not self.get_cookie(app_cookie):
             user_id = str(uuid.uuid4())
             self.set_cookie(app_cookie, user_id)
@@ -66,12 +68,14 @@ class BaseHandler(web.RequestHandler):
 class MainHandler(BaseHandler):
     def get(self):
         clean_up_old_images()
-        self.render("index.html", image_captions=get_image_captions(self))
+        cookie = self.get_cookie(app_cookie)
+        self.render("index.html", image_captions=get_image_captions(cookie))
 
 
 class DetailHandler(BaseHandler):
     def get(self):
-        user_image_captions = get_image_captions(self)
+        cookie = self.get_cookie(app_cookie)
+        user_image_captions = get_image_captions(cookie)
         image = self.get_argument('image', None)
         if not image:
             self.set_status(400)
@@ -85,7 +89,8 @@ class DetailHandler(BaseHandler):
 
 class CleanupHandler(BaseHandler):
     def delete(self):
-        clean_up_user_images(self)
+        cookie = self.get_cookie(app_cookie)
+        clean_up_user_images(cookie)
 
 
 class UploadHandler(BaseHandler):
@@ -102,7 +107,8 @@ class UploadHandler(BaseHandler):
         finish_ret = []
         threads = []
         ret_queue = queue.Queue()
-        user_img_prefix = get_user_img_prefix(self)
+        cookie = self.get_cookie(app_cookie)
+        user_img_prefix = get_user_img_prefix(cookie)
 
         new_files = self.request.files['file']
         for file_des in new_files:
@@ -133,22 +139,22 @@ class UploadHandler(BaseHandler):
         self.finish(json.dumps(finish_ret))
 
 
-def get_user_img_prefix(self):
-    cookie = self.get_cookie(app_cookie)
+def get_user_img_prefix(cookie):
     user_id = cookie if cookie else ""
     return temp_img_prefix + user_id + "-"
 
 
-def valid_user_img(self, img):
+def valid_user_img(cookie, img):
+    """Checks if the given user uploaded the given image"""
     default_img = not img.startswith(static_img_path + temp_img_prefix)
-    user_img = img.startswith(static_img_path + get_user_img_prefix(self))
-    current_user_img = user_img if self.get_cookie(app_cookie) else False
+    user_img = img.startswith(static_img_path + get_user_img_prefix(cookie))
+    current_user_img = user_img if cookie else False
     return default_img or current_user_img
 
 
-def get_image_captions(self):
+def get_image_captions(cookie):
     return collections.OrderedDict(
-        (k, v) for k, v in image_captions.items() if valid_user_img(self, k)
+        (k, v) for k, v in image_captions.items() if valid_user_img(cookie, k)
     )
 
 
@@ -158,12 +164,16 @@ def run_ml_queued(img_path, ret_queue):
 
 
 def valid_file_ext(filename):
-    filename, file_extension = os.path.splitext(filename)
-    return file_extension.lower() in VALID_EXT
+    """Checks if the given filename contains a valid extension"""
+    _filename, file_extension = os.path.splitext(filename)
+    valid = file_extension.lower() in VALID_EXT
+    if not valid:
+        logging.warning('Invalid file extension: ' + file_extension)
+    return valid
 
 
-# Runs ML on given image
 def run_ml(img_path):
+    """Runs ML on given image"""
     mime_type = mimetypes.guess_type(img_path)[0]
     with open(img_path, 'rb') as img_file:
         file_form = {'image': (img_path, img_file, mime_type)}
@@ -185,15 +195,15 @@ def sort_image_captions():
         sorted(image_captions.items(), key=lambda t: t[0].lower()))
 
 
-# Gets list of images with relative paths from static dir
 def get_image_list():
+    """Gets list of images with relative paths from static dir"""
     image_list = sorted(os.listdir(static_img_path))
     rel_img_list = [static_img_path + s for s in image_list]
     return rel_img_list
 
 
-# Run all static images through ML
 def prepare_metadata():
+    """Run all static images through ML"""
     threads = []
 
     rel_img_list = get_image_list()
@@ -208,10 +218,13 @@ def prepare_metadata():
     sort_image_captions()
 
 
-# Deletes files uploaded through the GUI and removes them from the dict
-# If 'self' is given then only the current user's images are deleted
-def clean_up_user_images(self):
-    img_prefix = get_user_img_prefix(self) if self else temp_img_prefix
+def clean_up_user_images(cookie=None):
+    """Cleans up user images.
+
+    Deletes files uploaded through the GUI and removes them from the dict
+    If a cookie is given then only the current user's images are deleted
+    """
+    img_prefix = get_user_img_prefix(cookie) if cookie else temp_img_prefix
     img_list = get_image_list()
     for img_file in img_list:
         if img_file.startswith(static_img_path + img_prefix):
@@ -219,14 +232,18 @@ def clean_up_user_images(self):
             image_captions.pop(img_file)
 
 
-# Deletes expired user uploaded files and removes them from the dict
-# User uploaded images expire after one day
+
 def clean_up_old_images():
+    """Cleans up old user images.
+
+    Deletes expired user uploaded files and removes them from the dict
+    User uploaded images expire after one day
+    """
     img_list = get_image_list()
-    exp_time = time.time() - (24 * 60 * 60)
+    exp_time = time.time() - (24 * 60 * 60)  # 24 * 60 * 60 = 1 day in seconds
     for img_file in img_list:
-        if img_file.startswith(static_img_path + temp_img_prefix)\
-                and os.stat(img_file).st_ctime < exp_time:
+        if (img_file.startswith(static_img_path + temp_img_prefix)
+                and os.stat(img_file).st_ctime < exp_time):
             os.remove(img_file)
             image_captions.pop(img_file)
             logging.info("Deleted expired image: " + img_file)
@@ -238,7 +255,7 @@ def signal_handler(sig, frame):
 
 def shutdown():
     logging.info("Cleaning up image files")
-    clean_up_user_images(None)
+    clean_up_user_images()
     logging.info("Stopping web server")
     server.stop()
     ioloop.IOLoop.current().stop()
