@@ -26,7 +26,7 @@ import signal
 import time
 import threading
 import uuid
-from tornado import httpserver, ioloop, web
+from tornado import escape, httpserver, ioloop, web
 from tornado.options import define, options, parse_command_line
 try:
     import Queue as queue
@@ -49,33 +49,36 @@ temp_img_prefix = "MAX-"
 image_captions = collections.OrderedDict()
 VALID_EXT = ['.png', '.jpg', '.jpeg']
 error_raised = []
-app_cookie = 'max-image-caption-generator-web-app'
+app_cookie = 'max-image-caption-generator-web-app-' + str(uuid.uuid4())
 
 
 class BaseHandler(web.RequestHandler):
+    """
+    Documentation on cookies and users:
+    http://www.tornadoweb.org/en/stable/guide/security.html
+    """
     def prepare(self):
-        # Documentation on cookies:
-        # http://www.tornadoweb.org/en/stable/guide/security.html
-        if not self.get_cookie(app_cookie):
+        if not self.get_secure_cookie(app_cookie):
             user_id = str(uuid.uuid4())
-            self.set_cookie(app_cookie, user_id)
-            logging.info('New user cookie set: ' + user_id)
+            self.set_secure_cookie(app_cookie, user_id)
+            logging.info('New user cookie set:' + user_id)
         else:
-            logging.info('User cookie found: '
-                         + self.get_cookie(app_cookie))
+            logging.info('User cookie found: ' + self.current_user)
+
+    def get_current_user(self):
+        return escape.to_basestring(self.get_secure_cookie(app_cookie))
 
 
 class MainHandler(BaseHandler):
     def get(self):
         clean_up_old_images()
-        cookie = self.get_cookie(app_cookie)
-        self.render("index.html", image_captions=get_image_captions(cookie))
+        self.render("index.html",
+                    image_captions=get_image_captions(self.current_user))
 
 
 class DetailHandler(BaseHandler):
     def get(self):
-        cookie = self.get_cookie(app_cookie)
-        user_image_captions = get_image_captions(cookie)
+        user_image_captions = get_image_captions(self.current_user)
         image = self.get_argument('image', None)
         if not image:
             self.set_status(400)
@@ -89,8 +92,7 @@ class DetailHandler(BaseHandler):
 
 class CleanupHandler(BaseHandler):
     def delete(self):
-        cookie = self.get_cookie(app_cookie)
-        clean_up_user_images(cookie)
+        clean_up_user_images(self.current_user)
 
 
 class UploadHandler(BaseHandler):
@@ -107,8 +109,7 @@ class UploadHandler(BaseHandler):
         finish_ret = []
         threads = []
         ret_queue = queue.Queue()
-        cookie = self.get_cookie(app_cookie)
-        user_img_prefix = get_user_img_prefix(cookie)
+        user_img_prefix = get_user_img_prefix(self.current_user)
 
         new_files = self.request.files['file']
         for file_des in new_files:
@@ -139,22 +140,22 @@ class UploadHandler(BaseHandler):
         self.finish(json.dumps(finish_ret))
 
 
-def get_user_img_prefix(cookie):
-    user_id = cookie if cookie else ""
+def get_user_img_prefix(user_id):
+    user_id = user_id if user_id else ""
     return temp_img_prefix + user_id + "-"
 
 
-def valid_user_img(cookie, img):
+def valid_user_img(user_id, img):
     """Checks if the given user uploaded the given image"""
     default_img = not img.startswith(static_img_path + temp_img_prefix)
-    user_img = img.startswith(static_img_path + get_user_img_prefix(cookie))
-    current_user_img = user_img if cookie else False
+    user_img = img.startswith(static_img_path + get_user_img_prefix(user_id))
+    current_user_img = user_img if user_id else False
     return default_img or current_user_img
 
 
-def get_image_captions(cookie):
+def get_image_captions(user_id):
     return collections.OrderedDict(
-        (k, v) for k, v in image_captions.items() if valid_user_img(cookie, k)
+        (k, v) for k, v in image_captions.items() if valid_user_img(user_id, k)
     )
 
 
@@ -218,13 +219,13 @@ def prepare_metadata():
     sort_image_captions()
 
 
-def clean_up_user_images(cookie=None):
+def clean_up_user_images(user_id=None):
     """Cleans up user images.
 
     Deletes files uploaded through the GUI and removes them from the dict
     If a cookie is given then only the current user's images are deleted
     """
-    img_prefix = get_user_img_prefix(cookie) if cookie else temp_img_prefix
+    img_prefix = get_user_img_prefix(user_id) if user_id else temp_img_prefix
     img_list = get_image_list()
     for img_file in img_list:
         if img_file.startswith(static_img_path + img_prefix):
@@ -270,7 +271,8 @@ def make_app():
 
     configs = {
         'static_path': 'static',
-        'template_path': 'templates'
+        'template_path': 'templates',
+        "cookie_secret": os.urandom(32)
     }
 
     return web.Application(handlers, **configs)
