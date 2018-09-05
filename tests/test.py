@@ -21,7 +21,7 @@ temp_file_regex = r'^static/img/images/MAX-(.*?)-7-action-athlete-896567\.jpg$'
 caption_part = 'baseball'
 
 test_file_2 = 'static/img/images/ball-court-design-209977.jpg'
-temp_file_2_regex = r'^static/img/images/MAX-(.*?)-ball-court-design-209977\.jpg$'
+temp_file_2_re = r'^static/img/images/MAX-(.*?)-ball-court-design-209977\.jpg$'
 caption_part_2 = 'tennis'
 
 invalid_file = 'static/favicon.ico'
@@ -87,7 +87,7 @@ def test_multiple_file_upload():
 
     assert re.match(temp_file_regex, temp_file)
     assert caption_part in response[0]['caption']
-    assert re.match(temp_file_2_regex, response[1]['file_name'])
+    assert re.match(temp_file_2_re, response[1]['file_name'])
     assert caption_part_2 in response[1]['caption']
 
 
