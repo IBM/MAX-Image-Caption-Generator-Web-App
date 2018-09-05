@@ -268,6 +268,9 @@ $(function() {
 
     // Initialize Cookie Consent Banner
     window.cookieconsent.initialise({
+        cookie: {
+            name: app_cookie + '_consent'
+        },
         palette: {
             popup: {
                 background: "#66d1cd"
