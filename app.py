@@ -53,11 +53,17 @@ app_cookie = 'max-image-caption-generator-web-app-' + str(uuid.uuid4())
 
 
 class BaseHandler(web.RequestHandler):
-    """
-    Documentation on cookies and users:
+    def get_current_user(self):
+        return escape.to_basestring(self.get_secure_cookie(app_cookie))
+
+
+class LoginHandler(BaseHandler):
+    """Sets the User ID cookie
+
+    Documentation on cookies:
     http://www.tornadoweb.org/en/stable/guide/security.html
     """
-    def prepare(self):
+    def post(self):
         if not self.get_secure_cookie(app_cookie):
             user_id = str(uuid.uuid4())
             self.set_secure_cookie(app_cookie, user_id)
@@ -65,14 +71,11 @@ class BaseHandler(web.RequestHandler):
         else:
             logging.info('User cookie found: ' + self.current_user)
 
-    def get_current_user(self):
-        return escape.to_basestring(self.get_secure_cookie(app_cookie))
-
 
 class MainHandler(BaseHandler):
     def get(self):
         clean_up_old_images()
-        self.render("index.html",
+        self.render("index.html", cookie_key=app_cookie,
                     image_captions=get_image_captions(self.current_user))
 
 
@@ -91,11 +94,13 @@ class DetailHandler(BaseHandler):
 
 
 class CleanupHandler(BaseHandler):
+    @web.authenticated
     def delete(self):
         clean_up_user_images(self.current_user)
 
 
 class UploadHandler(BaseHandler):
+    @web.authenticated
     def post(self):
         try:
             requests.get(ml_endpoint)
@@ -266,7 +271,8 @@ def make_app():
         (r"/", MainHandler),
         (r"/upload", UploadHandler),
         (r"/cleanup", CleanupHandler),
-        (r"/detail", DetailHandler)
+        (r"/detail", DetailHandler),
+        (r"/login", LoginHandler)
     ]
 
     configs = {

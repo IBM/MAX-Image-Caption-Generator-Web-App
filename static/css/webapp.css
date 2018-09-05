@@ -121,3 +121,8 @@ a.more-info-icon {
 .featherlight .featherlight-close-icon {
     background: #5FBFBB;
 }
+
+.cc-revoke.cc-top {
+    right: 3em;
+    left: unset;
+}

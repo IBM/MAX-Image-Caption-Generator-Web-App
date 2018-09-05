@@ -8,6 +8,7 @@ test_url = 'http://localhost:8088'
 upload_url = test_url + '/upload'
 detail_url = test_url + '/detail'
 cleanup_url = test_url + '/cleanup'
+login_url = test_url + '/login'
 
 # Test message strings
 no_server_msg = 'Start web app server at ' + test_url + ' to run tests'
@@ -40,8 +41,6 @@ def check_server_up():
         try:
             r = session.get(test_url)
             server_up = r.status_code == 200
-            if server_up:
-                session2.get(test_url)
         except requests.exceptions.ConnectionError:
             server_up = False
 
@@ -50,6 +49,22 @@ def check_server_up():
 
 def test_server():
     assert check_server_up() is True, no_server_msg
+
+
+@pytest.mark.skipif(not check_server_up(), reason=no_server_msg)
+def test_no_login():
+    r = session.delete(cleanup_url)
+    assert r.status_code == 403
+    r = session.post(upload_url)
+    assert r.status_code == 403
+
+
+@pytest.mark.skipif(not check_server_up(), reason=no_server_msg)
+def test_login_success():
+    r = session.post(login_url)
+    cookies = r.cookies.get_dict()
+    assert any(key.startswith(key_base) for key in cookies)
+    session2.post(login_url)
 
 
 @pytest.mark.skipif(not check_server_up(), reason=no_server_msg)

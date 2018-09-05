@@ -209,6 +209,9 @@ function clean_up_imgs() {
             success: function(data) {
                 alert("Uploaded images successfully deleted");
                 window.location.reload();
+            },
+            error: function(jqXHR, status, error) {
+              alert('Delete Failed: ' + error);
             }
         });
     }
@@ -262,4 +265,49 @@ $(function() {
     $('.more-info-icon').on('click', function(e) {
         e.stopPropagation();
     });
+
+    // Initialize Cookie Consent Banner
+    window.cookieconsent.initialise({
+        palette: {
+            popup: {
+                background: "#66d1cd"
+            },
+            button: {
+                background: "#01807d",
+                text: "#ffffff"
+            }
+        },
+        showLink: false,
+        theme: "classic",
+        static: true,
+        position: "top",
+        type: "opt-in",
+        content: {
+        message: "This web app requires cookies to enable user sessions for image upload."
+        },
+        onStatusChange: function(status, chosenBefore) {
+            var type = this.options.type;
+            var didConsent = this.hasConsented();
+            if (type == 'opt-in' && didConsent) {
+                // On consent login to set user id cookie
+                $.ajax({
+                    url: "/login",
+                    method: "post",
+                    success: function(data) {
+                        $(".auth-btn").prop('disabled', false);
+                        $('.cc-revoke').remove(); // Remove revoke consent banner since it doesn't work
+                    },
+                    error: function(jqXHR, status, error) {
+                      alert('User Session Creation Failed: ' + error);
+                    }
+                });
+            }
+        },
+    });
+
+    // Enable auth req buttons and remove revoke consent banner if user_id is set
+    if (document.cookie.indexOf(app_cookie) > -1) {
+        $(".auth-btn").prop('disabled', false);
+        $('.cc-revoke').remove();
+    }
 });
