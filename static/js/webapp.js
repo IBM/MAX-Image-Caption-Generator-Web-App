@@ -174,7 +174,7 @@ function set_img_picker() {
                 var img_file = $(this).children('img').attr('src');
                 $("<a href='#'/>")
                     .attr("class", "glyphicon glyphicon-resize-full more-info-icon")
-                    .attr("data-featherlight", "/detail?image=" + img_file + " .image-detail")
+                    .attr("data-featherlight", "/detail?image=" + escape(img_file) + " .image-detail")
                     .prependTo($(this));
             });
             $('a.more-info-icon').featherlight('ajax');
@@ -198,6 +198,22 @@ function select_all(bool) {
         set_selected_images(get_keys());
     } else {
         set_selected_images([]);
+    }
+}
+
+function clean_up_imgs() {
+    if (confirm("Delete all uploaded images?")) {
+        $.ajax({
+            url: "/cleanup",
+            method: "delete",
+            success: function(data) {
+                alert("Uploaded images successfully deleted");
+                window.location.reload();
+            },
+            error: function(jqXHR, status, error) {
+              alert('Delete Failed: ' + error);
+            }
+        });
     }
 }
 
@@ -249,4 +265,52 @@ $(function() {
     $('.more-info-icon').on('click', function(e) {
         e.stopPropagation();
     });
+
+    // Initialize Cookie Consent Banner
+    window.cookieconsent.initialise({
+        cookie: {
+            name: app_cookie + '_consent'
+        },
+        palette: {
+            popup: {
+                background: "#66d1cd"
+            },
+            button: {
+                background: "#01807d",
+                text: "#ffffff"
+            }
+        },
+        showLink: false,
+        theme: "classic",
+        static: true,
+        position: "top",
+        type: "opt-in",
+        content: {
+        message: "This web app requires cookies to enable user sessions for image upload."
+        },
+        onStatusChange: function(status, chosenBefore) {
+            var type = this.options.type;
+            var didConsent = this.hasConsented();
+            if (type == 'opt-in' && didConsent) {
+                // On consent login to set user id cookie
+                $.ajax({
+                    url: "/login",
+                    method: "post",
+                    success: function(data) {
+                        $(".auth-btn").prop('disabled', false);
+                        $('.cc-revoke').remove(); // Remove revoke consent banner since it doesn't work
+                    },
+                    error: function(jqXHR, status, error) {
+                      alert('User Session Creation Failed: ' + error);
+                    }
+                });
+            }
+        },
+    });
+
+    // Enable auth req buttons and remove revoke consent banner if user_id is set
+    if (document.cookie.indexOf(app_cookie) > -1) {
+        $(".auth-btn").prop('disabled', false);
+        $('.cc-revoke').remove();
+    }
 });

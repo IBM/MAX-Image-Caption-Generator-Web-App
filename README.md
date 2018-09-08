@@ -278,6 +278,8 @@ There is a large amount of user uploaded images in a long running web app
 created with an emphasis to simplicity and easy orientation.
 * [Image Picker](http://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select
 element into a more user friendly graphical interface.
+* [Cookie Consent](https://cookieconsent.insites.com): Cookie Consent is a JavaScript plugin for alerting users about
+the use of cookies on a website.
 
 # Learn More
 
