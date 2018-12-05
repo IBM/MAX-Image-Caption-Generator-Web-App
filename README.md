@@ -10,7 +10,7 @@ useful with the data, we must first convert it to structured data.
 In this Code Pattern we will use one of the models from the
 [Model Asset Exchange (MAX)](https://developer.ibm.com/code/exchanges/models/),
 an exchange where developers can find and experiment with open source deep learning
-models. Specifically we will be using the [Image Caption Generator](https://github.com/IBM/MAX-Image-Caption-Generator)
+models. Specifically we will be using the [Image Caption Generator](https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/)
 to create a web application that will caption images and allow the user to filter through
 images based image content. The web application provides an interactive user interface
 backed by a lightweight python server using Tornado. The server takes in images via the
