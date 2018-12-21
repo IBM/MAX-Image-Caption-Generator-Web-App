@@ -1,6 +1,6 @@
 # Deploying the Image Caption Generator model to IBM Cloud
 
-1. Create a cluster using the [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/clusters
+1. Create a cluster using the [IBM Cloud Container Service](https://cloud.ibm.com/containers-kubernetes/clusters
 ). For this Code Pattern we will only need to use the Free tier which gives us access to a Kubernetes cluster with 1 worker node.
    > Note: This could take anywhere from 10 minutes to half an hour.
 
