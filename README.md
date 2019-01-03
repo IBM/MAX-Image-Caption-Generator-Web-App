@@ -200,9 +200,28 @@ Then change directory into the local repository
 
 #### 2. Installing dependencies
 
+The general recommendation for Python development is to use a virtual environment [(venv)](https://docs.python.org/3/tutorial/venv.html). To install and initialize a virtual environment, use the `venv` module on Python 3 (you install the virtualenv library for Python 2.7):
+
+```bash
+# Create the virtual environment using Python. Use one of the two commands depending on your Python version.
+# Note, it may be named python3 on your system.
+
+$ python -m venv mytestenv       # Python 3.X
+$ virtualenv mytestenv           # Python 2.X
+
+# Now source the virtual environment. Use one of the two commands depending on your OS.
+
+$ source mytestenv/bin/activate  # Mac or Linux
+$ ./mytestenv/Scripts/activate   # Windows PowerShell
+```
+
 Before running this web app you must install its dependencies:
 
-    pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
+
+> **TIP** :bulb: To terminate the virtual environment use the `deactivate` command.
 
 #### 3. Running the server
 
