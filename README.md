@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
+[![Build Status](https://api.travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
 
 # Create a web app to interact with machine learning generated image captions
 
@@ -8,7 +8,7 @@ A lot of that data is unstructured data, such as large texts, audio recordings, 
 useful with the data, we must first convert it to structured data.
 
 In this Code Pattern we will use one of the models from the
-[Model Asset Exchange (MAX)](https://developer.ibm.com/code/exchanges/models/),
+[Model Asset Exchange (MAX)](https://developer.ibm.com/exchanges/models/),
 an exchange where developers can find and experiment with open source deep learning
 models. Specifically we will be using the [Image Caption Generator](https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/)
 to create a web application that will caption images and allow the user to filter through
@@ -37,7 +37,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Included Components
 
-* [IBM Model Asset Exchange](https://developer.ibm.com/code/exchanges/models/): A place for developers to find and use
+* [IBM Model Asset Exchange](https://developer.ibm.com/exchanges/models/): A place for developers to find and use
 free and open source deep learning models.
 * [Docker](https://www.docker.com): Docker is a tool designed to make it easier to create, deploy, and run applications
 by using containers.
@@ -266,7 +266,7 @@ There is a large amount of user uploaded images in a long running web app
 
 # Links
 
-* [Model Asset eXchange (MAX)](https://developer.ibm.com/code/exchanges/models/)
+* [Model Asset eXchange (MAX)](https://developer.ibm.com/exchanges/models/)
 * [Center for Open-Source Data & AI Technologies (CODAIT)](https://developer.ibm.com/code/open/centers/codait/)
 * [MAX Announcement Blog](https://developer.ibm.com/code/2018/03/20/igniting-a-community-around-deep-learning-models-with-model-asset-exchange-max/)
 
@@ -274,9 +274,9 @@ There is a large amount of user uploaded images in a long running web app
 * [D3.js](https://d3js.org): D3.js is a JavaScript library for manipulating documents based on data.
 * [d3-cloud](https://github.com/jasondavies/d3-cloud): A Wordle-inspired word cloud layout written in JavaScript.
 * [Featherlight](https://noelboss.github.io/featherlight/): Featherlight is a very lightweight jQuery lightbox plugin.
-* [Glyphicons](http://glyphicons.com): GLYPHICONS is a library of precisely prepared monochromatic icons and symbols,
+* [Glyphicons](https://www.glyphicons.com/): GLYPHICONS is a library of precisely prepared monochromatic icons and symbols,
 created with an emphasis to simplicity and easy orientation.
-* [Image Picker](http://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select
+* [Image Picker](https://rvera.github.io/image-picker/): Image Picker is a simple jQuery plugin that transforms a select
 element into a more user friendly graphical interface.
 * [Cookie Consent](https://cookieconsent.insites.com): Cookie Consent is a JavaScript plugin for alerting users about
 the use of cookies on a website.
@@ -284,15 +284,15 @@ the use of cookies on a website.
 # Learn More
 
 * **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other
-[Artificial Intelligence Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/)
+[Artificial Intelligence Code Patterns](https://developer.ibm.com/technologies/artificial-intelligence/)
 * **AI and Data Code Pattern Playlist**: Bookmark our
 [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
-* **Watson Studio**: Master the art of data science with IBM's [Watson Studio](https://dataplatform.ibm.com/)
+* **Watson Studio**: Master the art of data science with IBM's [Watson Studio](https://dataplatform.cloud.ibm.com/)
 * **Deep Learning with Watson Studio**: Design and deploy deep learning models using neural networks, easily scale to
 hundreds of training runs. Learn more at [Deep Learning with Watson Studio](https://www.ibm.com/cloud/deep-learning).
 
 # License
 
-This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](http://www.apache.org/licenses/LICENSE-2.0.txt).
+This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
-[Apache Software License (ASL) FAQ](http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
+[Apache Software License (ASL) FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
