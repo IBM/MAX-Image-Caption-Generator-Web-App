@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
+[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
 
 # Create a web app to interact with machine learning generated image captions
 
@@ -190,7 +190,7 @@ You can also test it on the command line, for example:
 
 Clone the Image Caption Generator Web App repository locally by running the following command:
 
-    git clone https://github.com/IBM/MAX-Image-Caption-Generator-Web-App.git
+    git clone https://github.com/IBM/MAX-Image-Caption-Generator-Web-App
 
 > Note: You may need to `cd ..` out of the MAX-Image-Caption-Generator directory first
 
