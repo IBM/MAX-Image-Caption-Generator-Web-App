@@ -77,6 +77,7 @@ class MainHandler(BaseHandler):
         clean_up_old_images()
         self.render("index.html", cookie_key=app_cookie,
                     image_captions=get_image_captions(self.current_user))
+    head = get
 
 
 class DetailHandler(BaseHandler):
@@ -318,6 +319,8 @@ def main():
         raise SystemExit
     logging.info("Metadata prepared in %s seconds", end - start)
 
+    logging.info("Web application available locally at:")
+    logging.info("\thttp://localhost:" + str(options.port))
     logging.info("Use Ctrl+C to stop web server")
     ioloop.IOLoop.current().start()
 
