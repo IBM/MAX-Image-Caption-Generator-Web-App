@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App)
+[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App) [![Website Status](https://img.shields.io/website/http/max-image-caption-generator-web-app.mybluemix.net.svg?label=demo+app)](http://max-image-caption-generator-web-app.mybluemix.net/)
 
 # Create a web app to interact with machine learning generated image captions
 
