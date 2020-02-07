@@ -154,7 +154,7 @@ Go to `http://localhost:5000` to load it. From there you can explore the API and
 
 Use the `model/predict` endpoint to load a test file and get captions for the image from the API.
 
-The [model assets folder](https://github.com/IBM/MAX-Image-Caption-Generator/tree/master/assets)
+The [model samples folder](https://github.com/IBM/MAX-Image-Caption-Generator/tree/master/samples)
 contains a few images you can use to test out the API, or you can use your own.
 
 You can also test it on the command line, for example:
