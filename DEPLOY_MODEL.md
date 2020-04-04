@@ -10,11 +10,11 @@
 
 3. On your cluster dashboard, select `Worker Nodes` in the sidebar and take note of the `Public IP Address` for the node.
 
-> Note: The IP address will not be displayed until the cluster is fully deployed.
-
+   > Note: The IP address will not be displayed until the cluster is fully deployed.
+   
    ![Worker IP](doc/source/images/worker-public-ip.png)
 
-4. Click the `Kubernetes Dashboard` button to open the dashboard. Hit the `+ Create` button in the top right corner. Go to `Create an app`.
+4. Click the `Kubernetes Dashboard` button to open the dashboard. Hit the `+ Create` button in the top right corner. Go to `Create from form`.
    Fill in the following fields:
    ```
     App name: <Select a name>
