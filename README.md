@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App) [![Website Status](https://img.shields.io/website/http/max-image-caption-generator-web-app.mybluemix.net.svg?label=demo+app)](http://max-image-caption-generator-web-app.mybluemix.net/)
+[![Build Status](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App.svg?branch=master)](https://travis-ci.org/IBM/MAX-Image-Caption-Generator-Web-App) [![Website Status](https://img.shields.io/website/http/max-image-caption-generator-web-app.codait-prod-41208c73af8fca213512856c7a09db52-0000.us-east.containers.appdomain.cloud.svg?label=demo+app)](http://max-image-caption-generator-web-app.codait-prod-41208c73af8fca213512856c7a09db52-0000.us-east.containers.appdomain.cloud)
 
 # Create a web app to interact with machine learning generated image captions
 
@@ -104,8 +104,10 @@ You can also deploy the model and web app on Kubernetes using the latest docker 
 
 On your Kubernetes cluster, run the following commands:
 
-    kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator/master/max-image-caption-generator.yaml
-    kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator-Web-App/master/max-image-caption-generator-web-app.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator/master/max-image-caption-generator.yaml
+kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator-Web-App/master/max-image-caption-generator-web-app.yaml
+```
 
 The web app will be available at port `8088` of your cluster.
 The model will only be available internally, but can be accessed externally through the `NodePort`.
@@ -139,7 +141,9 @@ The model will only be available internally, but can be accessed externally thro
 
 To run the docker image, which automatically starts the model serving API, run:
 
-    docker run -it -p 5000:5000 codait/max-image-caption-generator
+```
+docker run -it -p 5000:5000 codait/max-image-caption-generator
+```
 
 This will pull a pre-built image from Docker Hub (or use an existing image if already cached locally) and run it.
 If you'd rather build the model locally you can follow the steps in the
@@ -159,7 +163,9 @@ contains a few images you can use to test out the API, or you can use your own.
 
 You can also test it on the command line, for example:
 
-    curl -F "image=@path/to/image.jpg" -X POST http://localhost:5000/model/predict
+```bash
+curl -F "image=@path/to/image.jpg" -X POST http://localhost:5000/model/predict
+```
 
 ```json
 {
@@ -190,25 +196,33 @@ You can also test it on the command line, for example:
 
 Clone the Image Caption Generator Web App repository locally by running the following command:
 
-    git clone https://github.com/IBM/MAX-Image-Caption-Generator-Web-App
+```
+git clone https://github.com/IBM/MAX-Image-Caption-Generator-Web-App
+```
 
 > Note: You may need to `cd ..` out of the MAX-Image-Caption-Generator directory first
 
 Then change directory into the local repository
 
-    cd MAX-Image-Caption-Generator-Web-App
+```
+cd MAX-Image-Caption-Generator-Web-App
+```
 
 #### 2. Installing dependencies
 
 Before running this web app you must install its dependencies:
 
-    pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 #### 3. Running the server
 
 You then start the web app by running:
 
-    python app.py
+```
+python app.py
+```
 
 Once it's finished processing the default images (< 1 minute) you can then access the web app at:
 [`http://localhost:8088`](http://localhost:8088)
@@ -220,7 +234,9 @@ The Image Caption Generator endpoint must be available at `http://localhost:5000
 If you want to use a different port or are running the ML endpoint at a different location
 you can change them with command-line options:
 
-    python app.py --port=[new port] --ml-endpoint=[endpoint url including protocol and port]
+```
+python app.py --port=[new port] --ml-endpoint=[endpoint url including protocol and port]
+```
 
 #### 5. Instructions for Docker (Optional)
 
@@ -230,21 +246,29 @@ network stack. This is done in the following steps:
 Modify the command that runs the Image Caption Generator REST endpoint to map an additional port in the container to a
 port on the host machine. In the example below it is mapped to port `8088` on the host but other ports can also be used.
 
-    docker run -it -p 5000:5000 -p 8088:8088 --name max-image-caption-generator codait/max-image-caption-generator
+```
+docker run -it -p 5000:5000 -p 8088:8088 --name max-image-caption-generator codait/max-image-caption-generator
+```
 
 Build the web app image by running:
 
-    docker build -t max-image-caption-generator-web-app .
+```
+docker build -t max-image-caption-generator-web-app .
+```
 
 Run the web app container using:
 
-    docker run --net='container:max-image-caption-generator' -it max-image-caption-generator-web-app
+```
+docker run --net='container:max-image-caption-generator' -it max-image-caption-generator-web-app
+```
 
 ##### Using the Docker Hub Image
 
 You can also deploy the web app with the latest docker image available on DockerHub by running:
 
-    docker run --net='container:max-image-caption-generator' -it codait/max-image-caption-generator-web-app
+```
+docker run --net='container:max-image-caption-generator' -it codait/max-image-caption-generator-web-app
+```
 
 This will use the model docker container run above and can be run without cloning the web app repo locally.
 
