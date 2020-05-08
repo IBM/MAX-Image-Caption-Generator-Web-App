@@ -9,7 +9,7 @@ spec:
   - port: 8088
   type: LoadBalancer
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: max-image-caption-generator-web-app
