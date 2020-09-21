@@ -100,7 +100,7 @@ viewed by clicking `View app`.
 
 ## Deploy on Kubernetes
 
-You can also deploy the model and web app on Kubernetes using the latest docker images on Docker Hub.
+You can also deploy the model and web app on Kubernetes using the latest docker images on Quay.
 
 On your Kubernetes cluster, run the following commands:
 
@@ -142,10 +142,10 @@ The model will only be available internally, but can be accessed externally thro
 To run the docker image, which automatically starts the model serving API, run:
 
 ```
-docker run -it -p 5000:5000 codait/max-image-caption-generator
+docker run -it -p 5000:5000 quay.io/codait/max-image-caption-generator
 ```
 
-This will pull a pre-built image from Docker Hub (or use an existing image if already cached locally) and run it.
+This will pull a pre-built image from Quay (or use an existing image if already cached locally) and run it.
 If you'd rather build the model locally you can follow the steps in the
 [model README](https://github.com/IBM/MAX-Image-Caption-Generator/blob/master/README.md#steps).
 
@@ -247,7 +247,7 @@ Modify the command that runs the Image Caption Generator REST endpoint to map an
 port on the host machine. In the example below it is mapped to port `8088` on the host but other ports can also be used.
 
 ```
-docker run -it -p 5000:5000 -p 8088:8088 --name max-image-caption-generator codait/max-image-caption-generator
+docker run -it -p 5000:5000 -p 8088:8088 --name max-image-caption-generator quay.io/codait/max-image-caption-generator
 ```
 
 Build the web app image by running:
@@ -262,12 +262,12 @@ Run the web app container using:
 docker run --net='container:max-image-caption-generator' -it max-image-caption-generator-web-app
 ```
 
-##### Using the Docker Hub Image
+##### Using the Quay Image
 
 You can also deploy the web app with the latest docker image available on DockerHub by running:
 
 ```
-docker run --net='container:max-image-caption-generator' -it codait/max-image-caption-generator-web-app
+docker run --net='container:max-image-caption-generator' -it quay.io/codait/max-image-caption-generator-web-app
 ```
 
 This will use the model docker container run above and can be run without cloning the web app repo locally.
