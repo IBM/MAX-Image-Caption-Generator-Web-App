@@ -18,7 +18,7 @@
    Fill in the following fields:
    ```
     App name: <Select a name>
-    Container image: codait/max-image-caption-generator:latest
+    Container image: quay.io/codait/max-image-caption-generator:latest
     Number of pods: 1
     Service: External
     Port: 5000 | Target Port: 5000 | Protocol: TCP
