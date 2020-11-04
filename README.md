@@ -264,7 +264,7 @@ docker run --net='container:max-image-caption-generator' -it max-image-caption-g
 
 ##### Using the Quay Image
 
-You can also deploy the web app with the latest docker image available on DockerHub by running:
+You can also deploy the web app with the latest docker image available on Quay.io by running:
 
 ```
 docker run --net='container:max-image-caption-generator' -it quay.io/codait/max-image-caption-generator-web-app
