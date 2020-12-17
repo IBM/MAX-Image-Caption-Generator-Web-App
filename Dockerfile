@@ -16,8 +16,11 @@
 
 FROM  python:alpine
 
-COPY . /app
-WORKDIR /app
+RUN useradd --create-home max
+USER max
+WORKDIR /home/max
+
+COPY . .
 RUN pip install -r requirements.txt
 
 EXPOSE 8088
